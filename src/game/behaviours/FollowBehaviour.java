@@ -26,10 +26,15 @@ public class FollowBehaviour implements Behaviour {
     }
 
     /**
+     * Determines the action to tke during the actor's turn to follow the target.
+     *
+     * Calculates the distance between the actor and the target, then finds the
+     * nearest accessible location that brings the actor closer to the target.
+     * If this location exists, it returns a MoveActorAction to move the actor to this location.
      *
      * @param actor the Actor acting
      * @param map the GameMap containing the Actor
-     * @return
+     * @return A MoveActorAction to move towards the target, or null if there is nowhere closer to move.
      */
     @Override
     public Action getAction(Actor actor, GameMap map) {

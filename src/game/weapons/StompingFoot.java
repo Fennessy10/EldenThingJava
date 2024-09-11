@@ -52,7 +52,7 @@ public class StompingFoot extends IntrinsicWeapon {
 
             for (Location surroundingLocation : surroundingLocations) {
                 Ground surroundingGround = surroundingLocation.getGround();
-                if (surroundingGround.hasCapability(Status.BURNABLE_GROUND)) {
+                if (!surroundingGround.hasCapability(Ability.FIRE_RESISTANT)) {
                     surroundingLocation.addItem(new Fire());
                 }
             }

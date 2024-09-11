@@ -9,35 +9,50 @@ import game.enums.NewActorAttributes;
 import game.actions.ConsumeAction;
 
 /**
+ * A class representing a consumable ShadowTree Fragment item that blesses the actor by increasing their maximum attributes.
  *
+ * The ShadowTree Fragment can be consumed by an actor to permanently increase their maximum hit points (HP),
+ * mana, and strength. Once consumed, the fragment disappears from the actor's inventory.
  */
-public class ShadowTreeFragment extends Item implements ConsumableItem {
-    public ShadowTreeFragment(){
-            super("Shadow Tree Fragment", ',', true);
+public class ShadowTreeFragment extends Item implements Consumable {
+    private int HP_INCREASE = 50;
+    private int MANA_INCREASE = 25;
+    private int STRENGTH_INCREASE = 5;
+
+    /**
+     * Constructor.
+     * Initializes the ShadowTreeFragment with a name and display character.
+     */
+    public ShadowTreeFragment() {
+        super("ShadowTree Fragment", 's', true);
     }
 
     /**
+     * Consumes the ShadowTree Fragment, blessing the actor by increasing their maximum attributes.
      *
-     * @param actor
-     * @return
+     * @param actor who is consuming the object
+     * @return a string describing the result of the consumption.
      */
     @Override
     public String consume(Actor actor) {
-        actor.modifyAttributeMaximum(BaseActorAttributes.HEALTH, ActorAttributeOperations.INCREASE, 50);
-        actor.modifyAttributeMaximum(BaseActorAttributes.MANA, ActorAttributeOperations.INCREASE, 25);
-        actor.modifyAttributeMaximum(NewActorAttributes.STRENGTH, ActorAttributeOperations.INCREASE, 5);
+        actor.modifyAttributeMaximum(BaseActorAttributes.HEALTH, ActorAttributeOperations.INCREASE, HP_INCREASE);
+        actor.modifyAttributeMaximum(BaseActorAttributes.MANA, ActorAttributeOperations.INCREASE, MANA_INCREASE);
+        actor.modifyAttributeMaximum(NewActorAttributes.STRENGTH, ActorAttributeOperations.INCREASE, STRENGTH_INCREASE);
         actor.removeItemFromInventory(this);
         return String.format("Shadowtree Fragment consumed by " + actor + "." + actor + " feels stronger.");
     }
 
     /**
+     * Returns the allowable actions that can be performed on the Flask of Rejuvenation
+     * This method adds a {@link ConsumeAction} to the list of actions.
      *
-     * @param actor the actor that owns the item
-     * @return
+     * @param owner the actor that owns the item
+     * @return an ActionList containing the allowable actions.
      */
     @Override
-    public ActionList allowableActions(Actor actor) {
-        ActionList actions = super.allowableActions(actor);
+    public ActionList allowableActions(Actor owner) {
+        ActionList actions = new ActionList();
+
         actions.add(new ConsumeAction(this));
         return actions;
     }

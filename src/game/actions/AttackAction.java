@@ -78,9 +78,9 @@ public class AttackAction extends Action {
 
 
     /**
-     *
+     * Description of the action to display on the menu
      * @param actor The actor performing the action.
-     * @return
+     * @return A string description of the attack action
      */
 
     @Override
