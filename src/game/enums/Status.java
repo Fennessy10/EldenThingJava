@@ -9,5 +9,7 @@ package game.enums;
 public enum Status {
     HOSTILE_TO_ENEMY,
     BURNING,
-    BURNABLE_GROUND
+    BURNABLE_GROUND,
+    ENEMY,
+    FOLLOW,
 }
