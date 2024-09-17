@@ -17,7 +17,8 @@ import game.grounds.Wall;
 import game.consumables.FlaskOfHealing;
 import game.consumables.FlaskOfRejuvenation;
 import game.consumables.ShadowTreeFragment;
-import game.weapons.GreatKnife;
+import game.weapons.GreatKnife;import game.weapons.LifeSteal;
+import game.weapons.Quickstep;
 import game.weapons.ShortSword;
 
 /**
@@ -61,16 +62,19 @@ public class Application {
             }
         }
 
-        Player player = new Player("Tarnished", '@', 150, 5, 100);
+        Player player = new Player("Tarnished", '@', 150, 10, 100);
         world.addPlayer(player, gameMap.at(7, 4));
 
         // Place the ShortSword at coordinates (x=7, y=8)
-        ShortSword shortSword = new ShortSword();
+        ShortSword shortSword = new ShortSword(new Quickstep());
         gameMap.at(7, 8).addItem(shortSword);
 
         // Place the ShortSword at coordinates (x=5, y=8)
-        GreatKnife greatKnife = new GreatKnife();
+        GreatKnife greatKnife = new GreatKnife(new Quickstep());
         gameMap.at(5, 8).addItem(greatKnife);
+
+        GreatKnife greatKnife2 = new GreatKnife(new LifeSteal());
+        gameMap.at(15, 6).addItem(greatKnife2);
 
         FlaskOfHealing flaskOfHealing = new FlaskOfHealing();
         gameMap.at(10, 9).addItem(flaskOfHealing);
@@ -94,6 +98,7 @@ public class Application {
         gameMap.at(22, 3).addItem(shadowTreeFragment5);
 
         gameMap.at(42, 4).addActor(new FurnaceGolem());
+
 
         world.run();
 
