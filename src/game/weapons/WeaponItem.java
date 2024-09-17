@@ -2,6 +2,8 @@ package game.weapons;
 
 import edu.monash.fit2099.engine.actions.ActionList;
 import edu.monash.fit2099.engine.actors.Actor;
+import edu.monash.fit2099.engine.actors.attributes.ActorAttributeOperations;
+import edu.monash.fit2099.engine.actors.attributes.BaseActorAttributes;
 import edu.monash.fit2099.engine.items.Item;
 import edu.monash.fit2099.engine.items.PickUpAction;
 import edu.monash.fit2099.engine.positions.GameMap;
@@ -27,7 +29,7 @@ public abstract class WeaponItem extends Item implements Weapon {
     private final String verb;
     private float damageMultiplier;
     private int strengthReq;
-
+    private WeaponArt weaponArt;
 
     /**
      * Constructor.
@@ -46,8 +48,12 @@ public abstract class WeaponItem extends Item implements Weapon {
         this.hitRate = hitRate;
         this.damageMultiplier = DEFAULT_DAMAGE_MULTIPLIER;
         this.strengthReq = strengthReq;
+        this.weaponArt = null;
     }
 
+    public void setWeaponArt(WeaponArt weaponArt) {
+        this.weaponArt = weaponArt;
+    }
     /**
      * Executes the attack with the weapon
      *
@@ -59,13 +65,22 @@ public abstract class WeaponItem extends Item implements Weapon {
     @Override
     public String attack(Actor attacker, Actor target, GameMap map) {
         Random rand = new Random();
+        String result = "";
+
         if (!(rand.nextInt(100) < this.hitRate)) {
-            return attacker + " misses " + target + ".";
+            result += "\n" + attacker + " misses " + target + ".";
+            return result;
+        }
+
+        if (attacker.getAttribute(BaseActorAttributes.MANA) >= weaponArt.manaCost && weaponArt != null) {
+            attacker.modifyAttribute(BaseActorAttributes.MANA, ActorAttributeOperations.DECREASE, weaponArt.manaCost);
+            result += weaponArt.execute(attacker,map);
         }
 
         target.hurt(Math.round(damage * damageMultiplier));
+        result += String.format("\n%s %s %s for %d damage", attacker, verb, target, damage);
 
-        return String.format("%s %s %s for %d damage", attacker, verb, target, damage);
+        return result;
     }
 
     /**
@@ -76,7 +91,7 @@ public abstract class WeaponItem extends Item implements Weapon {
      */
     @Override
     public PickUpAction getPickUpAction(Actor actor) {
-        if (actor.hasCapability(NewActorAttributes.STRENGTH)) {
+        if (portable){
             if (strengthReq <= actor.getAttributeMaximum(NewActorAttributes.STRENGTH)) {
                 return new PickUpAction(this);
             }
