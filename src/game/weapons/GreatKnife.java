@@ -15,7 +15,10 @@ public class GreatKnife extends WeaponItem implements Weapon{
      * Initializes great knife with predefined attributes.
      */
 
-    public GreatKnife(){
+    public GreatKnife(WeaponArt weaponArt){
+
         super("GreatKnife",'†', 75, "attack", 60, 5);
+
+        this.setWeaponArt(weaponArt);
     }
 }

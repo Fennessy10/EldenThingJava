@@ -14,8 +14,10 @@ public class ShortSword extends WeaponItem implements Weapon{
      * Constructor for ShortSword class
      * Initializes short sword with predefined attributes.
      */
-    public ShortSword(){
+    public ShortSword(WeaponArt weaponArt){
+
         super("ShortSword",'!', 100, "attack", 75, 10);
+        this.setWeaponArt(weaponArt);
     }
 
 }
