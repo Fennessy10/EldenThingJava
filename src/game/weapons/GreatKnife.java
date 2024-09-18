@@ -1,5 +1,8 @@
 package game.weapons;
 
+import edu.monash.fit2099.engine.actions.ActionList;
+import edu.monash.fit2099.engine.actors.Actor;
+import edu.monash.fit2099.engine.positions.Location;
 import edu.monash.fit2099.engine.weapons.Weapon;
 /**
  * Class representing a great knife weapon item.
@@ -9,7 +12,7 @@ import edu.monash.fit2099.engine.weapons.Weapon;
  *  * Created by:
  *  * @author Brianna Vaughan
  */
-public class GreatKnife extends WeaponItem implements Weapon{
+public class GreatKnife extends WeaponItem {
     /**
      * Constructor for GreatKnife class
      * Initializes great knife with predefined attributes.
@@ -21,4 +24,5 @@ public class GreatKnife extends WeaponItem implements Weapon{
 
         this.setWeaponArt(weaponArt);
     }
+
 }
