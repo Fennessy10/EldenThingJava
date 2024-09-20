@@ -1,4 +1,4 @@
-package game;
+package game.enums;
 
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.actors.StatusEffect;

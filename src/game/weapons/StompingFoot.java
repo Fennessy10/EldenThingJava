@@ -7,12 +7,11 @@ import edu.monash.fit2099.engine.positions.Location;
 import edu.monash.fit2099.engine.positions.Exit;
 import edu.monash.fit2099.engine.weapons.IntrinsicWeapon;
 import game.enums.Ability;
-import game.enums.Status;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
-import game.consumables.Fire;
+import game.items.Fire;
 
 /**
  * Class representing the Stomp weapon.
