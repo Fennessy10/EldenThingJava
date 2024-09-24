@@ -8,7 +8,7 @@ import edu.monash.fit2099.engine.items.Item;
 /**
  *
  */
-public class FlaskOfHealing extends Item implements ConsumableItem {
+public class FlaskOfHealing extends Item implements Consumable {
     private int charges;
     private int maxCharges = 5;
 

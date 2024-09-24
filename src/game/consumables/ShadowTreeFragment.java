@@ -11,7 +11,7 @@ import game.actions.ConsumeAction;
 /**
  *
  */
-public class ShadowTreeFragment extends Item implements ConsumableItem {
+public class ShadowTreeFragment extends Item implements Consumable {
     public ShadowTreeFragment(){
             super("Shadow Tree Fragment", ',', true);
     }
