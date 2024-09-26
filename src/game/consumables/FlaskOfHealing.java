@@ -36,7 +36,7 @@ public class FlaskOfHealing extends Item implements Consumable {
     @Override
     public String consume(Actor player) {
         if (charges < CHARGES) {
-            charges +=1;
+            charges ++;
             player.modifyAttribute(BaseActorAttributes.HEALTH, ActorAttributeOperations.INCREASE, HEALING_POINTS);
             return String.format(player + "consumes " + this + " have been healed by " + HEALING_POINTS + " points");
         } else  {

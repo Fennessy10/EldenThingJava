@@ -36,7 +36,7 @@ public class FlaskOfRejuvenation extends Item implements Consumable {
     @Override
     public String consume(Actor player) {
         if (charges < CHARGES) {
-            charges +=1;
+            charges ++;
             player.modifyAttribute(BaseActorAttributes.MANA, ActorAttributeOperations.INCREASE, HEALING_POINTS);
             return String.format("consumes " + this + "their mana has been restored by " + HEALING_POINTS + " points");
         } else  {
