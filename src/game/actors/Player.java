@@ -18,11 +18,9 @@ import game.actors.BurningStatusEffect;
  * Class representing the Player.
  * Created by:
  * @author Adrian Kristanto
- * Modified by:
+ * Modified by: Brianna Vaughan
  */
 public class Player extends Actor {
-    private BurningStatusEffect burningEffect;
-
     /**
      * Constructor.
      *
@@ -30,19 +28,14 @@ public class Player extends Actor {
      * @param displayChar Character to represent the player in the UI
      * @param hitPoints   Player's starting number of hitpoints
      */
-    public Player(String name, char displayChar, int hitPoints) {
+    public Player(String name, char displayChar, int hitPoints, int strength, int mana) {
         super(name, displayChar, hitPoints);
         this.addCapability(Status.HOSTILE_TO_ENEMY);
+        this.addCapability(Status.FOLLOW);
         this.setIntrinsicWeapon(new BareFist());
+        this.addAttribute(NewActorAttributes.STRENGTH, new BaseActorAttribute(strength));
+        this.addAttribute(BaseActorAttributes.MANA, new BaseActorAttribute(mana));
 
-        BaseActorAttribute manaAttribute = new BaseActorAttribute(100);
-        this.addAttribute(BaseActorAttributes.MANA, manaAttribute);
-
-        BaseActorAttribute strengthAttribute = new BaseActorAttribute(5);
-        this.addAttribute(NewActorAttributes.STRENGTH, strengthAttribute);
-
-        // Initialize the burning status effect
-        burningEffect = new BurningStatusEffect();
     }
 
     /**
@@ -56,25 +49,36 @@ public class Player extends Actor {
      */
     @Override
     public Action playTurn(ActionList actions, Action lastAction, GameMap map, Display display) {
-        if (getAttribute(BaseActorAttributes.HEALTH) == 0) {
-            display.println(FancyMessage.YOU_DIED);
-            return null;
-        } else {
-            display.println("Strength: " + getAttributeMaximum(NewActorAttributes.STRENGTH));
-            display.println("Mana: " + getAttribute(BaseActorAttributes.MANA) + "/" + getAttributeMaximum(BaseActorAttributes.MANA));
+        // Handle multi-turn Actions
+        if (lastAction.getNextAction() != null)
+            return lastAction.getNextAction();
 
-            // Check for BURNING status
-            if (this.hasCapability(Status.BURNING)) {
-                burningEffect.tick(map.locationOf(this), this);
+        // Return/print the console menu
+        Menu menu = new Menu(actions);
+        return menu.showMenu(this, display); // Ensure this returns a valid Action
+
+    }
+
+    /**
+     * Handles the behaviour when an actor becomes unconscious (i.e. when their hitpoints >= 0)
+     * In this implementation, it displays a "YOU DIED" message line by line, with a delay between each line.
+     * Afterward, it calls the superclass' unconscious method to handle any additional logic.
+     *
+     * @param actor the perpetrator
+     * @param map   where the actor fell unconscious
+     * @return a String representing the result of the unconscious state
+     */
+    @Override
+    public String unconscious(Actor actor, GameMap map) {
+        for (String line : FancyMessage.YOU_DIED.split("\n")) {
+            new Display().println(line);
+            try {
+                Thread.sleep(200);
+            } catch (Exception exception) {
+                exception.printStackTrace();
             }
-
-            // Handle multi-turn Actions
-            if (lastAction.getNextAction() != null)
-                return lastAction.getNextAction();
-
-            // Return/print the console menu
-            Menu menu = new Menu(actions);
-            return menu.showMenu(this, display); // Ensure this returns a valid Action
         }
+        return super.unconscious(actor, map);
     }
 }
+

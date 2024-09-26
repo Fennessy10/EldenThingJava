@@ -1,11 +1,28 @@
 package game.weapons;
 
+import edu.monash.fit2099.engine.actions.ActionList;
+import edu.monash.fit2099.engine.actors.Actor;
+import edu.monash.fit2099.engine.positions.Location;
+import edu.monash.fit2099.engine.weapons.Weapon;
 /**
- * Class representing The Short Sword Weapon
+ * Class representing a great knife weapon item.
+ * Short sword deals 75 damage and has a 60% chance to hit
+ * It requires actor to have minimum strength of 5 points to pick up.
+ *
+ *  * Created by:
+ *  * @author Brianna Vaughan
  */
+public class GreatKnife extends WeaponItem {
+    /**
+     * Constructor for GreatKnife class
+     * Initializes great knife with predefined attributes.
+     */
 
-public class GreatKnife extends WeaponItem{
-    public GreatKnife(){
+    public GreatKnife(WeaponArt weaponArt){
+
         super("GreatKnife",'†', 75, "attack", 60, 5);
+
+        this.setWeaponArt(weaponArt);
     }
+
 }
