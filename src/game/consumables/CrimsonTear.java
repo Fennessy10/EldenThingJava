@@ -4,6 +4,9 @@ import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.actors.attributes.ActorAttributeOperations;
 import edu.monash.fit2099.engine.actors.attributes.BaseActorAttributes;
 import edu.monash.fit2099.engine.items.Item;
+import edu.monash.fit2099.engine.positions.GameMap;
+import game.actors.BurningStatusEffect;
+import game.actors.HealingStatusEffect;
 import game.enums.NewActorAttributes;
 
 public class CrimsonTear extends Item implements Consumable{
@@ -25,10 +28,9 @@ public class CrimsonTear extends Item implements Consumable{
      * @return a string describing the result of the consumption.
      */
     @Override
-    public String consume(Actor actor) {
-        int HP_INCREASE = 30;
-        actor.modifyAttribute(BaseActorAttributes.HEALTH, ActorAttributeOperations.INCREASE, HP_INCREASE);
+    public String consume(Actor actor, GameMap map) {
+        actor.addStatusEffect(new HealingStatusEffect(5,30));
         actor.removeItemFromInventory(this);
-        return String.format("Crimson Tear consumed by " + actor + "." + actor + " feels stronger.");
+        return String.format("Crimson Tear consumed by " + actor + "." + actor + " feels healthier.");
     }
 }

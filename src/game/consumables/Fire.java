@@ -14,7 +14,6 @@ import game.enums.Status;
  * The fire persists for a certain number of turns and inflicts damage to actors who stand on it.
  */
 public class Fire extends Item {
-    private int MAX_BURN_DURATION = 5;
     private int burnDuration = 0;
 
     public Fire() {
@@ -30,9 +29,10 @@ public class Fire extends Item {
      */
     @Override
     public void tick(Location location) {
+        int maxBurnDuration = 5;
         super.tick(location);
         burnDuration++;
-        if (burnDuration == MAX_BURN_DURATION) {
+        if (burnDuration == maxBurnDuration) {
             location.removeItem(this); // Remove the fire once the burn duration has passed.
         }
 

@@ -5,6 +5,7 @@ import edu.monash.fit2099.engine.actors.attributes.ActorAttributeOperations;
 import edu.monash.fit2099.engine.actors.attributes.BaseActorAttributes;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.items.Item;
+import edu.monash.fit2099.engine.positions.GameMap;
 import game.actions.ConsumeAction;
 
 /**
@@ -34,7 +35,7 @@ public class FlaskOfRejuvenation extends Item implements Consumable {
      * @return a string describing the result of the consumption
      */
     @Override
-    public String consume(Actor player) {
+    public String consume(Actor player, GameMap map) {
         if (charges < CHARGES) {
             charges ++;
             player.modifyAttribute(BaseActorAttributes.MANA, ActorAttributeOperations.INCREASE, HEALING_POINTS);

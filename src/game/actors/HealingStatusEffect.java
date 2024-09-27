@@ -6,16 +6,17 @@ import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.positions.Location;
 
 public class HealingStatusEffect extends StatusEffect {
-    private int healingTurns = 0;
+    private int healingTurns;
+    private final int healAmount;
 
-    public HealingStatusEffect(String name) {
+    public HealingStatusEffect(int healingTurns, int healAmount) {
         super("Healing");
+        this.healingTurns = healingTurns;
+        this.healAmount = healAmount;
     }
 
     @Override
     public void tick(Location location, Actor actor) {
-        int healAmount = 30;
-
         while (healingTurns < 5) {
             healingTurns++;
             actor.heal(healAmount); // Apply 30 healing
