@@ -6,27 +6,29 @@ import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.positions.Location;
 
 public class HealingStatusEffect extends StatusEffect {
-    private int healingTurns;
+    private final int maxHealingTurns;
     private final int healAmount;
+    private int healingCount = 0;
 
     public HealingStatusEffect(int healingTurns, int healAmount) {
         super("Healing");
-        this.healingTurns = healingTurns;
+        this.maxHealingTurns = healingTurns;
         this.healAmount = healAmount;
     }
 
     @Override
     public void tick(Location location, Actor actor) {
-        while (healingTurns < 5) {
-            healingTurns++;
-            actor.heal(healAmount); // Apply 30 healing
+        while (healingCount < maxHealingTurns) {
+            healingCount++;
+            actor.heal(healAmount); // Apply healing
             new Display().println(String.format("\nThe %s is healed for %d hp!", actor, healAmount));
         }
 
 
-        if (healingTurns == 5) { // The player heals only for every tick
+        if (healingCount == maxHealingTurns) { // The player heals only for every tick
             actor.removeStatusEffect(this);
-            healingTurns = 0; // Reset healing turns
+            healingCount = 0; // Reset healing turns
         }
     }
 }
+
