@@ -5,6 +5,7 @@ import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.actors.attributes.ActorAttributeOperations;
 import edu.monash.fit2099.engine.actors.attributes.BaseActorAttributes;
 import edu.monash.fit2099.engine.items.Item;
+import edu.monash.fit2099.engine.positions.GameMap;
 import game.enums.NewActorAttributes;
 import game.actions.ConsumeAction;
 
@@ -15,9 +16,6 @@ import game.actions.ConsumeAction;
  * mana, and strength. Once consumed, the fragment disappears from the actor's inventory.
  */
 public class ShadowTreeFragment extends Item implements Consumable {
-    private int HP_INCREASE = 50;
-    private int MANA_INCREASE = 25;
-    private int STRENGTH_INCREASE = 5;
 
     /**
      * Constructor.
@@ -34,10 +32,13 @@ public class ShadowTreeFragment extends Item implements Consumable {
      * @return a string describing the result of the consumption.
      */
     @Override
-    public String consume(Actor actor) {
-        actor.modifyAttributeMaximum(BaseActorAttributes.HEALTH, ActorAttributeOperations.INCREASE, HP_INCREASE);
-        actor.modifyAttributeMaximum(BaseActorAttributes.MANA, ActorAttributeOperations.INCREASE, MANA_INCREASE);
-        actor.modifyAttributeMaximum(NewActorAttributes.STRENGTH, ActorAttributeOperations.INCREASE, STRENGTH_INCREASE);
+    public String consume(Actor actor, GameMap map) {
+        int HPIncrease = 50;
+        actor.modifyAttributeMaximum(BaseActorAttributes.HEALTH, ActorAttributeOperations.INCREASE, HPIncrease);
+        int manaIncrease = 25;
+        actor.modifyAttributeMaximum(BaseActorAttributes.MANA, ActorAttributeOperations.INCREASE, manaIncrease);
+        int strengthIncrease = 5;
+        actor.modifyAttributeMaximum(NewActorAttributes.STRENGTH, ActorAttributeOperations.INCREASE, strengthIncrease);
         actor.removeItemFromInventory(this);
         return String.format("Shadowtree Fragment consumed by " + actor + "." + actor + " feels stronger.");
     }

@@ -29,18 +29,20 @@ public class StompingFoot extends IntrinsicWeapon {
         super(100, "stomps on", 5);
     }
 
+    private static final int OutOf100 = 100;
+
     @Override
     public String attack(Actor attacker, Actor target, GameMap map) {
         Random random = new Random();
         StringBuilder result = new StringBuilder();
 
-        if (!(random.nextInt(100) < this.hitRate)) {
+        if (!(random.nextInt(OutOf100) < this.hitRate)) {
             return attacker + " misses " + target + ".";
         }
         target.hurt(damage);
         result.append(String.format("%s %s %s for %d damage", attacker, verb, target, damage));
 
-        if (random.nextInt(100) < EXPLOSION_CHANCE) {
+        if (random.nextInt(OutOf100) < EXPLOSION_CHANCE) {
             result.append("\n%s's stomp attack results in an Explosion!");
 
             Location location = map.locationOf(attacker);

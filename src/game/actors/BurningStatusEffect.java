@@ -12,7 +12,6 @@ import game.enums.Status;
  */
 public class BurningStatusEffect extends StatusEffect {
     private int burningTurns = 0;
-    private int BURN_DAMAGE = 5;
 
     /**
      * Constructor
@@ -30,9 +29,10 @@ public class BurningStatusEffect extends StatusEffect {
      */
     @Override
     public void tick(Location location, Actor actor) {
+        int burnDamage = 5;
         burningTurns++;
-        actor.hurt(BURN_DAMAGE); // Apply 5 damage for being on burning ground
-        new Display().println(String.format("\nThe explosion burns %s for %d damage!", actor, BURN_DAMAGE));
+        actor.hurt(burnDamage); // Apply 5 damage for being on burning ground
+        new Display().println(String.format("\nThe explosion burns %s for %d damage!", actor, burnDamage));
 
         if (burningTurns == 1) { // The player burns only for every tick they spend on the burning ground
             actor.removeStatusEffect(this);
