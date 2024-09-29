@@ -1,27 +1,61 @@
 package game.actors;
 
+import edu.monash.fit2099.engine.actions.Action;
 import edu.monash.fit2099.engine.actions.ActionList;
+import edu.monash.fit2099.engine.actions.DoNothingAction;
 import edu.monash.fit2099.engine.actors.Actor;
+import edu.monash.fit2099.engine.actors.Behaviour;
 import edu.monash.fit2099.engine.actors.attributes.ActorAttributeOperations;
 import edu.monash.fit2099.engine.actors.attributes.BaseActorAttributes;
+import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.positions.GameMap;
-import game.behaviours.FollowBehaviour;
+import game.actions.AttackAction;
+import game.behaviours.WanderBehaviour;
 import game.consumables.Consumable;
 import game.enums.Status;
 
+import java.util.HashMap;
 import java.util.Map;
 
-public class Scarab extends Enemy implements Consumable {
+public class Scarab extends Actor implements Consumable {
+    private final Map<Integer, Behaviour> scarabBehaviours = new HashMap<>();
 
     /**
-     * The constructor of the Actor class.
-     *
-     * @param name        the name of the Actor
-     * @param displayChar the character that will represent the Actor in the display
-     * @param hitPoints   the Actor's starting hit points
+     * The constructor of the scarab class
+     * it wanders around and can be consumed
      */
-    public Scarab(String name, char displayChar, int hitPoints) {
+    public Scarab() {
         super("Scarab", 'b', 25);
+        this.addCapability(Status.ENEMY);
+        this.scarabBehaviours.put(999, new WanderBehaviour());
+    }
+
+    /**
+     * Select and return an action to perform on the current turn.
+     *
+     * @param actions    collection of possible Actions for this Actor
+     * @param lastAction The Action this Actor took last turn. Can do interesting things in conjunction with Action.getNextAction()
+     * @param map        the map containing the Actor
+     * @param display    the I/O object to which messages may be written
+     * @return the Action to be performed
+     */
+    /**
+     * Select and return an action to perform on the current turn.
+     *
+     * @param actions    collection of possible Actions for this Actor
+     * @param lastAction The Action this Actor took last turn. Can do interesting things in conjunction with Action.getNextAction()
+     * @param map        the map containing the Actor
+     * @param display    the I/O object to which messages may be written
+     * @return the Action to be performed
+     */
+    @Override
+    public Action playTurn(ActionList actions, Action lastAction, GameMap map, Display display) {
+        for (Behaviour behaviour : scarabBehaviours.values()) {
+            Action action = behaviour.getAction(this, map);
+            if (action != null)
+                return action;
+        }
+        return new DoNothingAction();
     }
 
     /**
@@ -38,9 +72,8 @@ public class Scarab extends Enemy implements Consumable {
     @Override
     public ActionList allowableActions(Actor otherActor, String direction, GameMap map) {
         ActionList actions = new ActionList();
-
-        if (otherActor.hasCapability(Status.FOLLOW)) {
-            super.behavioursPut(500, new FollowBehaviour(otherActor));
+        if (otherActor.hasCapability(Status.HOSTILE_TO_ENEMY)) {
+            actions.add(new AttackAction(this, direction));
         }
         return actions;
     }

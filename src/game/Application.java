@@ -9,6 +9,7 @@ import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.World;
 import game.actors.FurnaceGolem;
 import game.actors.Player;
+import game.actors.Scarab;
 import game.displays.FancyMessage;
 import game.grounds.Dirt;
 import game.grounds.Floor;
@@ -98,6 +99,7 @@ public class Application {
         gameMap.at(22, 3).addItem(shadowTreeFragment5);
 
         gameMap.at(42, 4).addActor(new FurnaceGolem());
+        gameMap.at(40, 5).addActor(new Scarab());
 
 
         world.run();
