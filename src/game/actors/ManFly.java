@@ -31,6 +31,28 @@ public class ManFly extends Actor {
         this.followBehaviour = null; //set original state is not following any actor
     }
 
+    /**
+     * A new method to check if any actor is nearby
+     * We check the position of the 9 squares around ManFly by traversing ox and oy.
+     * The traversal range is [-1, 0, 1] in both directions, which traverses the grid ManFly is currently on,
+     * and up, down, left, right, and diagonal grids, which are the attack and follow ranges
+     * @param map map for the game
+     * @param location current location
+     * @return if any actor nearby, ture or not
+     */
+    private Actor getNearby(GameMap map, Location location) {
+        for(int ox = -1; ox <= 1; ox++){
+            for(int oy = -1; oy <= 1; oy++){ //ox and oy represent the offset of ManFly's current coordinates
+                Location nearbyLocation = map.at(location.x() + ox, location.y() + oy);
+                if (nearbyLocation.equals(location) && nearbyLocation.getActor() instanceof Player) {
+                    //check if the actor on the position is the player
+                    return nearbyLocation.getActor();
+                }
+            }
+        }
+        return null; //return null if no one nearby
+    }
+
 
     /**
      * Determine action for man_fly in each turn
@@ -40,7 +62,7 @@ public class ManFly extends Actor {
      *
      * @param actions actions for man_fly
      * @param lastAction lastAction perform
-     * @param map map for the game here
+     * @param map map for the game
      * @param display show output
      */
     @Override
