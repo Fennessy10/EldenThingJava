@@ -99,7 +99,7 @@ public class Application {
         gameMap.at(22, 3).addItem(shadowTreeFragment5);
 
         gameMap.at(42, 4).addActor(new FurnaceGolem());
-        gameMap.at(40, 5).addActor(new Scarab());
+        gameMap.at(20, 5).addActor(new Scarab());
 
 
         world.run();

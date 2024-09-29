@@ -80,14 +80,15 @@ public class Scarab extends Actor implements Consumable {
         return actions;
     }
 
+
+
     /**
      * @param actor
      * @return
      */
     @Override
     public String consume(Actor actor, GameMap map) {
-        int HPIncrease = 30;
-        actor.modifyAttributeMaximum(BaseActorAttributes.HEALTH, ActorAttributeOperations.INCREASE, HPIncrease);
+        actor.addStatusEffect(new HealingStatusEffect(actor,10,30, false));
         int manaIncrease = 50;
         actor.modifyAttributeMaximum(BaseActorAttributes.MANA, ActorAttributeOperations.INCREASE, manaIncrease);
         map.removeActor(this);

@@ -29,7 +29,7 @@ public class CrimsonTear extends Item implements Consumable{
      */
     @Override
     public String consume(Actor actor, GameMap map) {
-        actor.addStatusEffect(new HealingStatusEffect(5,30));
+        actor.addStatusEffect(new HealingStatusEffect(actor,5,30, true));
         actor.removeItemFromInventory(this);
         return String.format("Crimson Tear consumed by " + actor + "." + actor + " feels healthier.");
     }
