@@ -46,6 +46,7 @@ public class ManFly extends Actor {
     @Override
     public Action playTurn(ActionList actions, Action lastAction, GameMap map, Display display) {
         Location ManFlyLoaction = map.locationOf(this); //get location of man_fly
+
         return null;
     }
 
