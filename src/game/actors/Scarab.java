@@ -10,6 +10,7 @@ import edu.monash.fit2099.engine.actors.attributes.BaseActorAttributes;
 import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.positions.GameMap;
 import game.actions.AttackAction;
+import game.actions.ConsumeAction;
 import game.behaviours.WanderBehaviour;
 import game.consumables.Consumable;
 import game.enums.Status;
@@ -75,6 +76,7 @@ public class Scarab extends Actor implements Consumable {
         if (otherActor.hasCapability(Status.HOSTILE_TO_ENEMY)) {
             actions.add(new AttackAction(this, direction));
         }
+        actions.add(new ConsumeAction(this));
         return actions;
     }
 
