@@ -4,9 +4,9 @@ import edu.monash.fit2099.engine.actors.Actor;
 import game.actors.Spirit;
 
 /**
- * The SpiritSpawner class is responsible for spawning {@code Spirit} actors
- * in the game. It extends the {@link Spawner} class and provides a specific
- * implementation of the {@link #spawn()} method, which creates a new {@link Spirit} actor.
+ * The SpiritSpawner class is responsible for spawning Spirit actors
+ * in the game. It extends the Spawner class and provides a specific
+ * implementation of the spawn method, which creates a new Spirit actor.
  */
 public class SpiritSpawner extends Spawner{
 
