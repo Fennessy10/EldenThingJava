@@ -30,16 +30,6 @@ public class Puddle extends Ground implements Consumable {
     }
 
     /**
-     * Overridden tick method for the Puddle.
-     * Checks if an actor is standing on the puddle and allows for interaction.
-     * @param location The location of the Puddle on the GameMap.
-     */
-    @Override
-    public void tick(Location location) {
-        // Any logic for effects that happen over time can be added here.
-    }
-
-    /**
      * Allows the puddle to provide specific actions to actors who are standing on it.
      * @param actor the Actor standing on the Puddle.
      * @param location the current location of the Puddle.
