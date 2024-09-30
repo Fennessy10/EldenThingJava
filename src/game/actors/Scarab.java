@@ -106,6 +106,7 @@ public class Scarab extends Actor implements Consumable {
         String result = super.unconscious(actor, map) + "\n" + this + " explodes upon its death!";
 
 
+
         // Get the surrounding locations
         List<Location> surroundingLocations = new ArrayList<>();
         for (Exit exit : scarabLocation.getExits()) {
@@ -122,6 +123,8 @@ public class Scarab extends Actor implements Consumable {
             }
         }
 
+        CrimsonTear crimsonTear = new CrimsonTear("Crimson Tear", '*', true);
+        scarabLocation.addItem(crimsonTear);
         return result;
     }
 
