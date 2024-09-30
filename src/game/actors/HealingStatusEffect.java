@@ -20,6 +20,7 @@ public class HealingStatusEffect extends StatusEffect {
         this.recurrent = recurrent;
         if (!recurrent) {
             actor.modifyAttributeMaximum(BaseActorAttributes.HEALTH, ActorAttributeOperations.INCREASE, healAmount);
+            new Display().println(String.format("\nThe %s had their hp increased for %d !", actor, healAmount));
         }
     }
 
@@ -28,11 +29,12 @@ public class HealingStatusEffect extends StatusEffect {
         healingCount++;
         if (recurrent) {
             actor.heal(healAmount); // Apply healing
+            new Display().println(String.format("\nThe %s is healed for %d hp!", actor, healAmount));
         }
-        new Display().println(String.format("\nThe %s is healed for %d hp!", actor, healAmount));
 
 
         if (healingCount == Duration) { // The player heals only for every tick
+            if (!recurrent )
             actor.removeStatusEffect(this);
             healingCount = 0; // Reset healing turns
         }
