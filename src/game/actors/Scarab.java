@@ -8,14 +8,19 @@ import edu.monash.fit2099.engine.actors.Behaviour;
 import edu.monash.fit2099.engine.actors.attributes.ActorAttributeOperations;
 import edu.monash.fit2099.engine.actors.attributes.BaseActorAttributes;
 import edu.monash.fit2099.engine.displays.Display;
+import edu.monash.fit2099.engine.positions.Exit;
 import edu.monash.fit2099.engine.positions.GameMap;
+import edu.monash.fit2099.engine.positions.Location;
 import game.actions.AttackAction;
 import game.actions.ConsumeAction;
 import game.behaviours.WanderBehaviour;
 import game.consumables.Consumable;
+import game.consumables.CrimsonTear;
 import game.enums.Status;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class Scarab extends Actor implements Consumable {
@@ -80,8 +85,6 @@ public class Scarab extends Actor implements Consumable {
         return actions;
     }
 
-
-
     /**
      * @param actor
      * @return
@@ -93,4 +96,34 @@ public class Scarab extends Actor implements Consumable {
         map.removeActor(this);
         return String.format("Scarab consumed by " + actor + "." + actor + " feels stronger.");
     }
+
+    @Override
+    public String unconscious(Actor actor, GameMap map) {
+        // Retrieve the Scarab's current location before removing it from the map
+        Location scarabLocation = map.locationOf(this);
+
+        // Proceed with removing the Scarab from the map
+        String result = super.unconscious(actor, map) + "\n" + this + " explodes upon its death!";
+
+
+        // Get the surrounding locations
+        List<Location> surroundingLocations = new ArrayList<>();
+        for (Exit exit : scarabLocation.getExits()) {
+            surroundingLocations.add(exit.getDestination());
+        }
+
+        // Apply explosion damage to actors in the surroundings
+        int explosionDamage = 25;
+        for (Location surroundingLocation : surroundingLocations) {
+            if (surroundingLocation.containsAnActor()) {
+                Actor nearbyActor = surroundingLocation.getActor();
+                nearbyActor.hurt(explosionDamage);
+                result += String.format("\nThe explosion hits %s for %d damage!", nearbyActor, explosionDamage);
+            }
+        }
+
+        return result;
+    }
+
+
 }

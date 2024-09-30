@@ -58,7 +58,7 @@ public class Puddle extends Ground implements Consumable {
         int manaIncrease = 5;
 
         // Restore mana to the actor
-        actor.modifyAttributeMaximum(BaseActorAttributes.MANA, ActorAttributeOperations.INCREASE, manaIncrease);
+        actor.modifyAttribute(BaseActorAttributes.MANA, ActorAttributeOperations.INCREASE, manaIncrease);
 
         // Chance to spawn a scarab
         int spawnChance = 10;  // 10% chance
