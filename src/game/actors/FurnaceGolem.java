@@ -29,6 +29,7 @@ public class FurnaceGolem extends Enemy {
     public FurnaceGolem() {
         super("Furnace Golem", 'A', 1000);
         this.setIntrinsicWeapon(new StompingFoot());
+        this.addCapability(Ability.FIRE_RESISTANT);
     }
 
     /**

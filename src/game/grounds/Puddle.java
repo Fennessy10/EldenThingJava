@@ -12,6 +12,7 @@ import edu.monash.fit2099.engine.positions.Location;
 import game.actions.ConsumeAction;
 import game.consumables.Consumable;
 import game.actors.Scarab;
+import game.enums.Ability;
 
 import java.util.Random;
 
@@ -27,6 +28,7 @@ public class Puddle extends Ground implements Consumable {
      */
     public Puddle() {
         super('~', "Puddle");
+        this.addCapability(Ability.FIRE_RESISTANT);
     }
 
     /**

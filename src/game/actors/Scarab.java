@@ -16,6 +16,7 @@ import game.actions.ConsumeAction;
 import game.behaviours.WanderBehaviour;
 import game.consumables.Consumable;
 import game.consumables.CrimsonTear;
+import game.enums.Ability;
 import game.enums.Status;
 
 import java.util.ArrayList;
@@ -34,6 +35,7 @@ public class Scarab extends Actor implements Consumable {
         super("Scarab", 'b', 25);
         this.addCapability(Status.ENEMY);
         this.scarabBehaviours.put(999, new WanderBehaviour());
+        this.addCapability(Ability.POISON_RESISTANT);
     }
 
 
