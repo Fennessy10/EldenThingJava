@@ -86,7 +86,7 @@ public class Scarab extends Actor implements Consumable {
     @Override
     public String consume(Actor actor, GameMap map) {
         actor.addStatusEffect(new HealingStatusEffect(actor,10,30, false));
-        actor.addStatusEffect(new ManaStatusEffect(actor, 10, 50, false));
+        actor.addStatusEffect(new ManaStatusEffect(actor, 10, 50));
         map.removeActor(this);
         return String.format("Scarab consumed by " + actor + "." + actor + " feels stronger.");
     }

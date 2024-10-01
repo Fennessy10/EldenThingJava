@@ -15,21 +15,17 @@ public class ManaStatusEffect extends StatusEffect {
     private final int Duration;
     private final int manaAmount;
     private int Count = 0;
-    private final boolean recurrent;
 
     /**
      * Constructor
      *
      */
-    public ManaStatusEffect(Actor actor, int Duration, int manaAmount, Boolean recurrent) {
+    public ManaStatusEffect(Actor actor, int Duration, int manaAmount) {
         super("Healing");
         this.Duration = Duration;
         this.manaAmount = manaAmount;
-        this.recurrent = recurrent;
-        if (!recurrent) {
-            actor.modifyAttributeMaximum(BaseActorAttributes.MANA, ActorAttributeOperations.INCREASE, manaAmount);
-            new Display().println(String.format("\nThe %s had their max mana increased for %d !", actor, manaAmount));
-        }
+        actor.modifyAttributeMaximum(BaseActorAttributes.MANA, ActorAttributeOperations.INCREASE, manaAmount);
+        new Display().println(String.format("\nThe %s had their max mana increased for %d !", actor, manaAmount));
     }
 
     /**
@@ -41,16 +37,8 @@ public class ManaStatusEffect extends StatusEffect {
     @Override
     public void tick(Location location, Actor actor) {
         Count++;
-        if (recurrent) {
-            actor.modifyAttribute(BaseActorAttributes.MANA, ActorAttributeOperations.INCREASE, manaAmount);
-            new Display().println(String.format("\nThe %s had their mana increased for %d !", actor, manaAmount));
-        }
-
-
-        if (Count == Duration) { // The player heals only for every tick
-            if (!recurrent) {
-                actor.modifyAttribute(BaseActorAttributes.MANA, ActorAttributeOperations.DECREASE, manaAmount);
-            }
+        if (Count == Duration) {
+            actor.modifyAttributeMaximum(BaseActorAttributes.MANA, ActorAttributeOperations.DECREASE, manaAmount);
             actor.removeStatusEffect(this);
             Count = 0;
         }

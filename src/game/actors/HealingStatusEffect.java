@@ -50,7 +50,7 @@ public class HealingStatusEffect extends StatusEffect {
 
         if (healingCount == Duration) { // The player heals only for every tick
             if (!recurrent) {
-                actor.hurt(healAmount);
+                actor.modifyAttributeMaximum(BaseActorAttributes.HEALTH, ActorAttributeOperations.DECREASE, healAmount);
             }
             actor.removeStatusEffect(this);
             healingCount = 0; // Reset healing turns
