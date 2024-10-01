@@ -36,15 +36,7 @@ public class Scarab extends Actor implements Consumable {
         this.scarabBehaviours.put(999, new WanderBehaviour());
     }
 
-    /**
-     * Select and return an action to perform on the current turn.
-     *
-     * @param actions    collection of possible Actions for this Actor
-     * @param lastAction The Action this Actor took last turn. Can do interesting things in conjunction with Action.getNextAction()
-     * @param map        the map containing the Actor
-     * @param display    the I/O object to which messages may be written
-     * @return the Action to be performed
-     */
+
     /**
      * Select and return an action to perform on the current turn.
      *
@@ -86,8 +78,10 @@ public class Scarab extends Actor implements Consumable {
     }
 
     /**
-     * @param actor
-     * @return
+     *
+     * @param actor the person who consumes the object
+     * @param map the current gameMap instance
+     * @return a string signifying how the individual feels stronger after consumption
      */
     @Override
     public String consume(Actor actor, GameMap map) {
@@ -97,6 +91,12 @@ public class Scarab extends Actor implements Consumable {
         return String.format("Scarab consumed by " + actor + "." + actor + " feels stronger.");
     }
 
+    /**
+     *
+     * @param actor the perpetrator
+     * @param map   where the actor fell unconscious
+     * @return a string signifying that the scarab explodes and causes damage
+     */
     @Override
     public String unconscious(Actor actor, GameMap map) {
         // Retrieve the Scarab's current location before removing it from the map

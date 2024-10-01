@@ -7,12 +7,20 @@ import edu.monash.fit2099.engine.actors.attributes.BaseActorAttributes;
 import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.positions.Location;
 
+/**
+ * Represents a status effect that causes an actor to gana mana overtime or gain mana temporarily depending on whether the ability
+ * is labelled as recurrent or not as the last parameter
+ */
 public class ManaStatusEffect extends StatusEffect {
     private final int Duration;
     private final int manaAmount;
     private int Count = 0;
     private final boolean recurrent;
 
+    /**
+     * Constructor
+     *
+     */
     public ManaStatusEffect(Actor actor, int Duration, int manaAmount, Boolean recurrent) {
         super("Healing");
         this.Duration = Duration;
@@ -24,6 +32,12 @@ public class ManaStatusEffect extends StatusEffect {
         }
     }
 
+    /**
+     * allows the status effect of gaining mana to occur overtime. Also removes the status effect/temporary mana
+     * increase
+     * @param location the location where the actor with the status effect is currently standing
+     * @param actor the actor holding the status effect
+     */
     @Override
     public void tick(Location location, Actor actor) {
         Count++;
@@ -34,8 +48,11 @@ public class ManaStatusEffect extends StatusEffect {
 
 
         if (Count == Duration) { // The player heals only for every tick
+            if (!recurrent) {
+                actor.modifyAttribute(BaseActorAttributes.MANA, ActorAttributeOperations.DECREASE, manaAmount);
+            }
             actor.removeStatusEffect(this);
-            Count = 0; // Reset healing turns
+            Count = 0;
         }
     }
 }
