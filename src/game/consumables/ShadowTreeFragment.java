@@ -16,7 +16,9 @@ import game.actions.ConsumeAction;
  * mana, and strength. Once consumed, the fragment disappears from the actor's inventory.
  */
 public class ShadowTreeFragment extends Item implements Consumable {
-
+    private final static int HPIncrease = 50;
+    final static int manaIncrease = 25;
+    final static int strengthIncrease = 5;
     /**
      * Constructor.
      * Initializes the ShadowTreeFragment with a name and display character.
@@ -33,11 +35,11 @@ public class ShadowTreeFragment extends Item implements Consumable {
      */
     @Override
     public String consume(Actor actor, GameMap map) {
-        int HPIncrease = 50;
+
         actor.modifyAttributeMaximum(BaseActorAttributes.HEALTH, ActorAttributeOperations.INCREASE, HPIncrease);
-        int manaIncrease = 25;
+
         actor.modifyAttributeMaximum(BaseActorAttributes.MANA, ActorAttributeOperations.INCREASE, manaIncrease);
-        int strengthIncrease = 5;
+
         actor.modifyAttributeMaximum(NewActorAttributes.STRENGTH, ActorAttributeOperations.INCREASE, strengthIncrease);
         actor.removeItemFromInventory(this);
         return String.format("Shadowtree Fragment consumed by " + actor + "." + actor + " feels stronger.");

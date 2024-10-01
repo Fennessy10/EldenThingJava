@@ -10,15 +10,14 @@ import game.actions.ConsumeAction;
 
 /**
  * A class representing an item that restores mana to an actor.
- *
  * The Flask of Rejuvenation can be consumed to restore a set number of mana points.
  * It has a limited number of charges, and each consumes one charge.
  * Once all charges are depleted, the flask can no longer be used.
  */
 public class FlaskOfRejuvenation extends Item implements Consumable {
-    private int CHARGES = 3;
+    private final static int maxCharges = 3;
     private int charges;
-    private int HEALING_POINTS = 100;
+    private final static int healingPoints = 100;
 
     /***
      * Constructor.
@@ -27,7 +26,6 @@ public class FlaskOfRejuvenation extends Item implements Consumable {
     public FlaskOfRejuvenation() {
         super("Flask of Rejuvenation", 'o', true);
     }
-
     /**
      * Consumes the Flask of Rejuvenation, restoring mana to the actor if charges remain.
      *
@@ -36,10 +34,10 @@ public class FlaskOfRejuvenation extends Item implements Consumable {
      */
     @Override
     public String consume(Actor player, GameMap map) {
-        if (charges < CHARGES) {
+        if (charges < maxCharges) {
             charges ++;
-            player.modifyAttribute(BaseActorAttributes.MANA, ActorAttributeOperations.INCREASE, HEALING_POINTS);
-            return String.format("consumes " + this + "their mana has been restored by " + HEALING_POINTS + " points");
+            player.modifyAttribute(BaseActorAttributes.MANA, ActorAttributeOperations.INCREASE, healingPoints);
+            return String.format("consumes " + this + "their mana has been restored by " + healingPoints + " points");
         } else  {
             return "Flask of Rejuvenation is empty.";
         }
