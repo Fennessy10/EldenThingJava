@@ -93,20 +93,22 @@ public class ManFly extends Actor {
     public Action playTurn(ActionList actions, Action lastAction, GameMap map, Display display) {
         Location ManFlyLoaction = map.locationOf(this); //get location of man_fly
         Map.Entry<Actor,String> nearby = getNearby(map,ManFlyLoaction);//get nearby players and direction of attack
-        Actor player = nearby.getKey();
-        String attackDirection = nearby.getValue();
-        int distance = Math.abs(ManFlyLoaction.x() - map.locationOf(player).x() + Math.abs(ManFlyLoaction.y() - map.locationOf(player).y()));
-        //calculate Manhattan Distance to check around 9 location
-        this.followBehaviour = new FollowBehaviour(player);
-        if (player != null) { //check if a player nearby
-            if (distance == 1) { //if in attack realm, attack
-                return ManFlyAttack(player,attackDirection);
+        if (nearby != null) { //check if a player nearby
+            Actor player = nearby.getKey();
+            String attackDirection = nearby.getValue();
+            int distance = Math.abs(ManFlyLoaction.x() - map.locationOf(player).x() + Math.abs(ManFlyLoaction.y() - map.locationOf(player).y()));
+            //calculate Manhattan Distance to check around 9 location
+            this.followBehaviour = new FollowBehaviour(player);
+
+                if (distance == 1) { //if in attack realm, attack
+                    return ManFlyAttack(player, attackDirection);
+                }
+                return followBehaviour.getAction(this, map); //if moving away, following
+        }
+            else {
+                return wanderBehaviour.getAction(this, map); // if no player around, keep wandering
             }
-            return followBehaviour.getAction(this, map); //if moving away, following
-        }
-        else{
-            return wanderBehaviour.getAction(this, map); // if no player around, keep wandering
-        }
+
     }
 
     /**
