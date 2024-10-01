@@ -26,13 +26,14 @@ import java.util.Map;
 
 public class Scarab extends Actor implements Consumable {
     private final Map<Integer, Behaviour> scarabBehaviours = new HashMap<>();
+    private final static int scarabHP = 25;
 
     /**
      * The constructor of the scarab class
      * it wanders around and can be consumed
      */
     public Scarab() {
-        super("Scarab", 'b', 25);
+        super("Scarab", 'b', scarabHP);
         this.addCapability(Status.ENEMY);
         this.scarabBehaviours.put(999, new WanderBehaviour());
         this.addCapability(Ability.POISON_RESISTANT);

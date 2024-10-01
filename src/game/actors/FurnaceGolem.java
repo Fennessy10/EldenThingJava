@@ -23,11 +23,12 @@ import java.util.TreeMap;
  */
 public class FurnaceGolem extends Enemy {
 
+    private static final int furnaceGolemHitpoints = 1000;
     /**
      * Constructor
      */
     public FurnaceGolem() {
-        super("Furnace Golem", 'A', 1000);
+        super("Furnace Golem", 'A', furnaceGolemHitpoints);
         this.setIntrinsicWeapon(new StompingFoot());
         this.addCapability(Ability.FIRE_RESISTANT);
     }
