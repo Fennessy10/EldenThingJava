@@ -13,14 +13,14 @@ import game.consumables.Consumable;
  */
 public class ConsumeAction extends Action {
     /**
-     * The consumable item that will be consumed by the actor
+     * The consumable that will be consumed by the actor
      */
     private Consumable consumable;
 
     /**
      * Constructor.
      *
-     * @param consumable the consumable item that will be consumed by the actor.
+     * @param consumable the consumable that will be consumed by the actor.
      */
     public ConsumeAction(Consumable consumable) {
         this.consumable = consumable;

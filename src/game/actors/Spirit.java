@@ -9,12 +9,13 @@ import game.weapons.BareFist;
  * and is displayed on the game map with the character '&'.
  */
 public class Spirit extends Enemy{
+    private static final int spiritHP = 100;
     /**
      * Constructs a Spirit enemy with 100 hit points and set its
      * intrinsic weapon to BareFist
      */
     public Spirit(){
-        super("Spirits",'&',100);
+        super("Spirits",'&',spiritHP);
         this.setIntrinsicWeapon(new BareFist());
     }
 

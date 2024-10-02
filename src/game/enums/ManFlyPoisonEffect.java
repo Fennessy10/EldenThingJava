@@ -11,8 +11,8 @@ import edu.monash.fit2099.engine.positions.Location;
  */
 public class ManFlyPoisonEffect extends StatusEffect {
     private int poisonTurns = 0;
-    private static final int POISON_DAMAGE = 10;
-    private static final int MAX_TURNS = 2;
+    private static final int poisonDamage = 10;
+    private static final int maxTurns = 2;
     /**
      * constructor for ManFlyPisonEffect class
      */
@@ -28,9 +28,9 @@ public class ManFlyPoisonEffect extends StatusEffect {
     @Override
     public void tick(Location location, Actor actor) {
         poisonTurns++;
-        actor.hurt(POISON_DAMAGE);
-        new Display().println(actor + " now is poisoned by Manfly and takes" + POISON_DAMAGE + " damage");
-        if (poisonTurns >= MAX_TURNS) { //remove effect in two turns
+        actor.hurt(poisonDamage);
+        new Display().println(actor + " now is poisoned by Manfly and takes" + poisonDamage + " damage");
+        if (poisonTurns >= maxTurns) { //remove effect in two turns
             actor.removeStatusEffect(this);
         }
     }

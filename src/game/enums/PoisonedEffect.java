@@ -35,14 +35,14 @@ public class PoisonedEffect extends StatusEffect {
      */
     @Override
     public void tick(Location location, Actor actor) {
-        poisonTurns ++;
-        actor.hurt(POISON_DAMAGE);
-        new Display().println(String.format("%s is poisoned and takes %d damage!", actor, POISON_DAMAGE));
-
-        if (poisonTurns == MAX_POISON_TURNS) {
-            actor.removeStatusEffect(this);
+        if (!actor.hasCapability(Ability.POISON_RESISTANT)){
+            poisonTurns ++;
+            actor.hurt(POISON_DAMAGE);
+            new Display().println(String.format("%s is poisoned and takes %d damage!", actor, POISON_DAMAGE));
+            if (poisonTurns == MAX_POISON_TURNS) {
+                actor.removeStatusEffect(this);
+            }
         }
-
     }
 
 }

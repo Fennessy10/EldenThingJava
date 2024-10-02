@@ -16,9 +16,9 @@ import game.actions.ConsumeAction;
  * Once all charges are depleted, the flask can no longer be used.
  */
 public class FlaskOfHealing extends Item implements Consumable {
-    private int CHARGES = 10;
+    private static final int maxCharges = 10;
     private int charges;
-    private int HEALING_POINTS = 150;
+    private static final int healingPoints = 150;
 
     /**
      * Constructor.
@@ -36,10 +36,10 @@ public class FlaskOfHealing extends Item implements Consumable {
      */
     @Override
     public String consume(Actor player, GameMap map) {
-        if (charges < CHARGES) {
+        if (charges < maxCharges) {
             charges ++;
-            player.modifyAttribute(BaseActorAttributes.HEALTH, ActorAttributeOperations.INCREASE, HEALING_POINTS);
-            return String.format(player + "consumes " + this + " have been healed by " + HEALING_POINTS + " points");
+            player.modifyAttribute(BaseActorAttributes.HEALTH, ActorAttributeOperations.INCREASE, healingPoints);
+            return String.format(player + "consumes " + this + " have been healed by " + healingPoints + " points");
         } else  {
             return "Flask of Healing is empty.";
         }

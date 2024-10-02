@@ -26,13 +26,14 @@ public class ManFly extends Actor {
     private final Random random = new Random();
     private WanderBehaviour wanderBehaviour;
     private FollowBehaviour followBehaviour;
+    private final static int manFlyHP = 50;
 
     /**
      * constructor for man_fly
      * initialize it behaviour, char and hit point(50)
      */
     public ManFly() {
-        super("ManFly",'%',50);
+        super("ManFly",'%',manFlyHP);
         this.wanderBehaviour = new WanderBehaviour(); //use wanderbehaviour we creat before
         this.addCapability(Status.ENEMY);
     }
