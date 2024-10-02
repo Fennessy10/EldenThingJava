@@ -1,5 +1,6 @@
 package game;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -7,10 +8,11 @@ import edu.monash.fit2099.engine.actions.MoveActorAction;
 import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.positions.FancyGroundFactory;
 import edu.monash.fit2099.engine.positions.GameMap;
+import edu.monash.fit2099.engine.positions.Location;
 import edu.monash.fit2099.engine.positions.World;
 import game.actors.FurnaceGolem;
 import game.actors.Player;
-import game.items.Gate;
+import game.grounds.Gate;
 import game.displays.FancyMessage;
 import game.grounds.*;
 import game.consumables.FlaskOfHealing;
@@ -92,17 +94,38 @@ public class Application {
         world.addGameMap(beluratSewersMap);
 
 
-        // Create a gate leading to "Belurat, Tower Settlement"
-        Gate towerGate = new Gate();
-        towerGate.addSampleAction(new MoveActorAction(beluratTowerMap.at(11,0), "to Belurat, Tower Settlement"));
+        // Creating a gate for Gravestite Plains to allow actors travel between maps
+        ArrayList<Location> gravestiteGateDestinations = new ArrayList<>(); // Initialising the list of destination map coordinates
+        ArrayList<String> gravestiteGateDirections = new ArrayList<>(); // Initialising list of associated String direction description for each destination
 
-        // Create a gate leading to "Belurat Sewers"
-        Gate sewerGate = new Gate();
-        sewerGate.addSampleAction(new MoveActorAction(beluratSewersMap.at(4,5), "to Belurat Sewers"));
+        // Adding the destination of "Belurat, Tower Settlement" map at coordinations (11,0)
+        gravestiteGateDestinations.add(beluratTowerMap.at(11,0));
+        // Adding corresponding direction "to Belurat, Tower Settlement"
+        gravestiteGateDirections.add("to Belurat, Tower Settlement");
+        gravestiteGateDestinations.add(beluratSewersMap.at(4,5));
+        gravestiteGateDirections.add("to Belurat Sewers");
 
-        // Add the gates to "Gravesite Plain" map at coordinates (0,0)
-        gameMap.at(0, 0).addItem(towerGate);
-        gameMap.at(0, 0).addItem(sewerGate);
+        // Placing the Gate at coordinates (7,6) on Gravestite Plains, injected with destination coordinate and direction lists
+        gameMap.at(7,6).setGround(new Gate(gravestiteGateDestinations, gravestiteGateDirections));
+
+
+        // Repeating this process for Belurate, Tower Settlement and Sewer Gates
+        ArrayList<Location> beluratGateDestinations = new ArrayList<>();
+        ArrayList<String> beluratGateDirections = new ArrayList<>();
+
+        beluratGateDestinations.add(gameMap.at(7,6));
+        beluratGateDirections.add("to Gravestite Plains");
+
+        beluratTowerMap.at(11,0).setGround(new Gate(beluratGateDestinations, beluratGateDirections));
+
+        ArrayList<Location> sewerGateDestinations = new ArrayList<>();
+        ArrayList<String> sewerGateDirections = new ArrayList<>();
+
+        sewerGateDestinations.add(gameMap.at(7,6));
+        sewerGateDirections.add("to Gravestite Plains");
+
+        beluratSewersMap.at(4,5).setGround(new Gate(sewerGateDestinations, sewerGateDirections));
+
 
         // BEHOLD, ELDEN THING!
         for (String line : FancyMessage.TITLE.split("\n")) {
