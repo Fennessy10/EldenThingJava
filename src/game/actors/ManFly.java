@@ -11,6 +11,7 @@ import game.actions.AttackAction;
 import game.behaviours.FollowBehaviour;
 import game.behaviours.WanderBehaviour;
 import edu.monash.fit2099.engine.positions.Location;
+import game.enums.Ability;
 import game.enums.ManFlyPoisonEffect;
 import game.enums.Status;
 
@@ -35,6 +36,7 @@ public class ManFly extends Actor {
         super("ManFly",'%',50);
         this.wanderBehaviour = new WanderBehaviour(); //use wanderbehaviour we creat before
         this.addCapability(Status.ENEMY);
+        this.addCapability(Ability.POISON_RESISTANT);
     }
 
 
