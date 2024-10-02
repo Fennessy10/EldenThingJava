@@ -174,11 +174,7 @@ public class Application {
 
         gameMap.at(42, 4).addActor(new FurnaceGolem());
 
-        beluratTowerMap.at(20,4).setGround(new Graveyard(new ManFlySpawner()));
-
         beluratTowerMap.at(26,6).setGround(new Graveyard(new SpiritSpawner()));
-
-        beluratSewersMap.at(6,5).setGround(new Graveyard(new SpiritSpawner()));
 
         beluratSewersMap.at(19,4).setGround(new Graveyard(new ManFlySpawner()));
 
