@@ -53,6 +53,10 @@ public class Player extends Actor {
         if (lastAction.getNextAction() != null)
             return lastAction.getNextAction();
 
+        // show strength + mana in menu console
+        display.println("Strength: " + getAttributeMaximum(NewActorAttributes.STRENGTH));
+        display.println("Mana: " + getAttribute(BaseActorAttributes.MANA) + "/" + getAttributeMaximum(BaseActorAttributes.MANA));
+
         // Return/print the console menu
         Menu menu = new Menu(actions);
         return menu.showMenu(this, display); // Ensure this returns a valid Action
