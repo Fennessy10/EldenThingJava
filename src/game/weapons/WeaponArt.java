@@ -4,8 +4,8 @@ import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.positions.GameMap;
 
 public abstract class WeaponArt {
-    String name;
-    int manaCost;
+    protected String name;
+    protected int manaCost;
 
     public WeaponArt(String name, int manaCost){
         this.name = name;
