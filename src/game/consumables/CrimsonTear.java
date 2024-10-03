@@ -2,14 +2,10 @@ package game.consumables;
 
 import edu.monash.fit2099.engine.actions.ActionList;
 import edu.monash.fit2099.engine.actors.Actor;
-import edu.monash.fit2099.engine.actors.attributes.ActorAttributeOperations;
-import edu.monash.fit2099.engine.actors.attributes.BaseActorAttributes;
 import edu.monash.fit2099.engine.items.Item;
 import edu.monash.fit2099.engine.positions.GameMap;
 import game.actions.ConsumeAction;
-import game.actors.BurningStatusEffect;
-import game.actors.HealingStatusEffect;
-import game.enums.NewActorAttributes;
+import game.enums.HealingStatusEffect;
 
 public class CrimsonTear extends Item implements Consumable{
 

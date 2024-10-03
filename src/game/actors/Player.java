@@ -12,7 +12,6 @@ import game.enums.NewActorAttributes;
 import game.enums.Status;
 import game.displays.FancyMessage;
 import game.weapons.BareFist;
-import game.actors.BurningStatusEffect;
 
 /**
  * Class representing the Player.

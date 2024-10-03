@@ -1,10 +1,9 @@
-package game.actors;
+package game.enums;
 
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.positions.Location;
 import edu.monash.fit2099.engine.actors.StatusEffect;
-import game.enums.Status;
 
 /**
  * Represents a status effect that causes an actor to take burning damage.
