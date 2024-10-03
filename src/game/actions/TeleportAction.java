@@ -21,7 +21,7 @@ public class TeleportAction extends Action {
      * Constructor for TeleportAction
      *
      * @param teleportToLocation The location on the destination map where the actor will teleport to
-     * @param teleportToMap The map to which the actor will teleport
+     * @param teleportToMap The map to which the actor will teleport.
      */
     public TeleportAction(Location teleportToLocation, GameMap teleportToMap) {
         this.teleportToLocation = teleportToLocation;
