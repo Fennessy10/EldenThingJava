@@ -94,7 +94,7 @@ public class Application {
         world.addGameMap(beluratSewersMap);
 
 
-        // Creating a gate for Gravestite Plains to allow actors travel between maps
+        // Creating a gate for Gravestite Plains to allow actors travel between maps.
         Gate gravestiteGate = new Gate();
 
         // Adding possible destination locations actor can travel to, to the Gate
