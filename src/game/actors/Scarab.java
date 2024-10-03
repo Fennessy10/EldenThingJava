@@ -5,8 +5,6 @@ import edu.monash.fit2099.engine.actions.ActionList;
 import edu.monash.fit2099.engine.actions.DoNothingAction;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.actors.Behaviour;
-import edu.monash.fit2099.engine.actors.attributes.ActorAttributeOperations;
-import edu.monash.fit2099.engine.actors.attributes.BaseActorAttributes;
 import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.positions.Exit;
 import edu.monash.fit2099.engine.positions.GameMap;
@@ -17,6 +15,8 @@ import game.behaviours.WanderBehaviour;
 import game.consumables.Consumable;
 import game.consumables.CrimsonTear;
 import game.enums.Ability;
+import game.enums.HealingStatusEffect;
+import game.enums.ManaStatusEffect;
 import game.enums.Status;
 
 import java.util.ArrayList;

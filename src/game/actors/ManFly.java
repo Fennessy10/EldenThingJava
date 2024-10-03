@@ -5,12 +5,15 @@ import edu.monash.fit2099.engine.actions.Action;
 import edu.monash.fit2099.engine.actions.ActionList;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.displays.Display;
+import edu.monash.fit2099.engine.positions.Exit;
 import edu.monash.fit2099.engine.positions.GameMap;
 import game.actions.AttackAction;
 import game.behaviours.FollowBehaviour;
 import game.behaviours.WanderBehaviour;
 import edu.monash.fit2099.engine.positions.Location;
+import game.enums.Ability;
 import game.enums.ManFlyPoisonEffect;
+import game.enums.Status;
 
 import java.util.AbstractMap;
 import java.util.Map;
@@ -24,57 +27,34 @@ public class ManFly extends Actor {
     private final Random random = new Random();
     private WanderBehaviour wanderBehaviour;
     private FollowBehaviour followBehaviour;
-    private final static int manFlyHP = 50;
 
     /**
      * constructor for man_fly
      * initialize it behaviour, char and hit point(50)
      */
     public ManFly() {
-        super("ManFly",'%',manFlyHP);
+        super("ManFly",'%',50);
         this.wanderBehaviour = new WanderBehaviour(); //use wanderbehaviour we creat before
-        this.followBehaviour = null; //set original state is not following any actor
+        this.addCapability(Status.ENEMY);
+        this.addCapability(Ability.POISON_RESISTANT);
     }
 
+
     /**
-     * A method to check if any actor is nearby
-     * We check the position of the 9 squares around ManFly by traversing ox and oy.
-     * The traversal range is [-1, 0, 1] in both directions, which traverses the grid ManFly is currently on,
-     * and up, down, left, right, and diagonal grids, which are the attack and follow ranges
+     * Determine allowable action towards Man_fly
      *
-     * @param map map for the game
-     * @param location current location
-     * @return if any actor nearby, ture or not
+     * @param otherActor the Actor that might be performing attack
+     * @param direction attack direction
+     * @param map game map
+     * @return a list for allowable action
      */
-    private Map.Entry<Actor,String> getNearby(GameMap map, Location location) {
-        for(int ox = -1; ox <= 1; ox++){
-            for(int oy = -1; oy <= 1; oy++){ //ox and oy represent the offset of ManFly's current coordinates
-                Location nearbyLocation = map.at(location.x() + ox, location.y() + oy);
-                if (nearbyLocation.equals(location) && nearbyLocation.getActor() instanceof Player) {
-                    //check if the actor on the position is the player
-                    String attackDirection = getDirection(ox,oy);
-                    return new AbstractMap.SimpleEntry<>(nearbyLocation.getActor(),attackDirection);
-                    //creates and returns a SimpleEntry containing nearby players and attack directions
-                }
-            }
+    @Override
+    public ActionList allowableActions(Actor otherActor, String direction, GameMap map) {
+        ActionList actions = new ActionList();
+        if(otherActor.hasCapability(Status.HOSTILE_TO_ENEMY)){
+            actions.add(new AttackAction(this,direction));
         }
-        return null; //return null if no one nearby
-    }
-
-
-    /**
-     * get attack direction by offset
-     *
-     * @param ox  offset fo x direction
-     * @param oy  offset fo y direction
-     * @return direction for attacking
-     */
-    private String getDirection(int ox,int oy){
-        if (ox == 1) return "east";
-        if (oy == 1) return "south";
-        if (ox == -1) return "west";
-        if (oy == -1) return "north";
-        return null;
+        return actions;
     }
 
 
@@ -92,42 +72,56 @@ public class ManFly extends Actor {
      */
     @Override
     public Action playTurn(ActionList actions, Action lastAction, GameMap map, Display display) {
-        Location ManFlyLoaction = map.locationOf(this); //get location of man_fly
-        Map.Entry<Actor,String> nearby = getNearby(map,ManFlyLoaction);//get nearby players and direction of attack
-        if (nearby != null) { //check if a player nearby
-            Actor player = nearby.getKey();
-            String attackDirection = nearby.getValue();
-            int distance = Math.abs(ManFlyLoaction.x() - map.locationOf(player).x() + Math.abs(ManFlyLoaction.y() - map.locationOf(player).y()));
-            //calculate Manhattan Distance to check around 9 location
-            this.followBehaviour = new FollowBehaviour(player);
-
-                if (distance == 1) { //if in attack realm, attack
-                    return ManFlyAttack(player, attackDirection);
+        for (Exit exit : map.locationOf(this).getExits()) {
+            //caheck if here exit a actor
+            if (exit.getDestination().containsAnActor()) {
+                Actor nearbyActor = exit.getDestination().getActor(); // get the first actor which the exit
+                //check if this actor is hostile
+                if (nearbyActor.hasCapability(Status.HOSTILE_TO_ENEMY)) {
+                    //check if in or out attack range around
+                    if (distance(map.locationOf(this), exit.getDestination()) == 1) {
+                        Action attackAction = ManFlyAttack(nearbyActor, exit.getDestination().toString());
+                        if(attackAction != null) {
+                            return attackAction;
+                        }
+                    } else {
+                        //if not in attack range, follow
+                        if (this.followBehaviour == null) {
+                            this.followBehaviour = new FollowBehaviour(nearbyActor);
+                        }return followBehaviour.getAction(this, map);
+                    }
                 }
-                return followBehaviour.getAction(this, map); //if moving away, following
-        }
-            else {
-                return wanderBehaviour.getAction(this, map); // if no player around, keep wandering
             }
-
+        }
+        return wanderBehaviour.getAction(this, map);
     }
+
+    /**
+     * calculate distance method from followbehaviour class
+     * @param a location a
+     * @param b location b
+     * @return the distance between
+     */
+    private int distance(Location a, Location b) {
+        return Math.abs(a.x() - b.x()) + Math.abs(a.y() - b.y());
+    }
+
 
     /**
      * attack action method only for man_fly
      * 25% chance to hit player, if hit on target, have 30% chance to cause poisoneffect
      *
      * @param player as attacking target
-     * @param attackDirection direction to attack
+     * @param direction direction to attack
      * @return action of man_fly attacking
      */
-    private Action ManFlyAttack(Actor player, String attackDirection) {
+    public Action ManFlyAttack(Actor player, String direction) {
         if(random.nextInt(100)<25){
             if(random.nextInt(100)<30){
                 player.addStatusEffect(new ManFlyPoisonEffect()); //if poison on add effect on player
             }
-            return new AttackAction(player,attackDirection); //keep attacking if not poison on
+            return new AttackAction(player,direction); //keep attacking if not poison on
         }
-        return null; //if not hit on
+        return null; //if attack miss
     }
-
 }
