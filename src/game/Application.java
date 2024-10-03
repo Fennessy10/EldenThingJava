@@ -95,36 +95,26 @@ public class Application {
 
 
         // Creating a gate for Gravestite Plains to allow actors travel between maps
-        ArrayList<Location> gravestiteGateDestinations = new ArrayList<>(); // Initialising the list of destination map coordinates
-        ArrayList<String> gravestiteGateDirections = new ArrayList<>(); // Initialising list of associated String direction description for each destination
+        Gate gravestiteGate = new Gate();
 
-        // Adding the destination of "Belurat, Tower Settlement" map at coordinations (11,0)
-        gravestiteGateDestinations.add(beluratTowerMap.at(11,0));
-        // Adding corresponding direction "to Belurat, Tower Settlement"
-        gravestiteGateDirections.add("to Belurat, Tower Settlement");
-        gravestiteGateDestinations.add(beluratSewersMap.at(4,5));
-        gravestiteGateDirections.add("to Belurat Sewers");
+        // Adding possible destination locations actor can travel to, to the Gate
+        gravestiteGate.addDestination(beluratTowerMap.at(11,0));
+        gravestiteGate.addDestination(beluratSewersMap.at(4,5));
 
-        // Placing the Gate at coordinates (7,6) on Gravestite Plains, injected with destination coordinate and direction lists
-        gameMap.at(7,6).setGround(new Gate(gravestiteGateDestinations, gravestiteGateDirections));
+        // Placing the Gate on Gravestite Plains
+        gameMap.at(7,6).setGround(gravestiteGate);
 
+        Gate beluratTowerGate = new Gate();
 
-        // Repeating this process for Belurate, Tower Settlement and Sewer Gates
-        ArrayList<Location> beluratGateDestinations = new ArrayList<>();
-        ArrayList<String> beluratGateDirections = new ArrayList<>();
+        beluratTowerGate.addDestination(gameMap.at(7,6));
 
-        beluratGateDestinations.add(gameMap.at(7,6));
-        beluratGateDirections.add("to Gravestite Plains");
+        beluratTowerMap.at(11,0).setGround(beluratTowerGate);
 
-        beluratTowerMap.at(11,0).setGround(new Gate(beluratGateDestinations, beluratGateDirections));
+        Gate beluratSewerGate = new Gate();
 
-        ArrayList<Location> sewerGateDestinations = new ArrayList<>();
-        ArrayList<String> sewerGateDirections = new ArrayList<>();
+        beluratSewerGate.addDestination(gameMap.at(7,6));
 
-        sewerGateDestinations.add(gameMap.at(7,6));
-        sewerGateDirections.add("to Gravestite Plains");
-
-        beluratSewersMap.at(4,5).setGround(new Gate(sewerGateDestinations, sewerGateDirections));
+        beluratSewersMap.at(4, 5).setGround(beluratSewerGate);
 
 
         // BEHOLD, ELDEN THING!
