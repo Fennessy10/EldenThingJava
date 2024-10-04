@@ -24,6 +24,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * it wanders around and can be consumed. The creature contains many treasures
+ */
 public class Scarab extends Actor implements Consumable {
     private final Map<Integer, Behaviour> scarabBehaviours = new HashMap<>();
     private final static int scarabHP = 25;
@@ -126,7 +129,7 @@ public class Scarab extends Actor implements Consumable {
             }
         }
 
-        CrimsonTear crimsonTear = new CrimsonTear("Crimson Tear", '*', true);
+        CrimsonTear crimsonTear = new CrimsonTear();
         scarabLocation.addItem(crimsonTear);
         return result;
     }

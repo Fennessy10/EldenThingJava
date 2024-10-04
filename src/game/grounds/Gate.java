@@ -4,6 +4,8 @@ import edu.monash.fit2099.engine.actions.ActionList;
 import edu.monash.fit2099.engine.actions.MoveActorAction;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.positions.*;
+import game.actions.TeleportAction;
+import game.actions.TeleportAction;
 
 import java.util.ArrayList;
 
@@ -15,34 +17,19 @@ public class Gate extends Ground {
     /**
      * List of destination locations where the Gate can teleport the actor.
      */
-    private ArrayList<Location> destinations;
+    private ArrayList<Location> destinations = new ArrayList<>();
 
-    /**
-     * List of corresponding directions for each destination, representing the direction in which
-     * the actor will be traveling.
-     */
-    private ArrayList<String> directions;
 
     /**
      * Constructor for Gate.
-     * Initializes the Gate with the name "Gate" and the symbol 'H'.
-     *
-     * @param destinations A list of locations that the Gate can teleport actors to.
-     * @param directions   A list of corresponding directions for each location.
-     *                     Each direction string represents the direction from the current location.
-     *                     The size of this list must match the size of the destinations list.
-     * @throws IllegalArgumentException if the size of the destinations list and directions list don't match.
+     * Initializes the Gate with the name "Gate" and the symbol 'H'
      */
-    public Gate(ArrayList<Location> destinations, ArrayList<String> directions) {
+    public Gate() {
         super('H', "Gate");
+    }
 
-        // Ensure both lists have the same number of elements
-        if (destinations.size() != directions.size()) {
-            throw new IllegalArgumentException("Every gate destination must have a direction!");
-        }
-
-        this.destinations = destinations;
-        this.directions = directions;
+    public void addDestination(Location location) {
+        this.destinations.add(location);
     }
 
     /**
@@ -60,11 +47,9 @@ public class Gate extends Ground {
         ActionList actions = new ActionList(); // Initialize the list of actions
 
         // Iterate over both lists and add a MoveActorAction for each destination and corresponding direction
-        for (int i = 0; i < destinations.size(); i++) {
-            Location targetLocation = destinations.get(i);
-            String targetDirection = directions.get(i);
-
-            actions.add(new MoveActorAction(targetLocation, targetDirection));
+        for (Location destination : destinations) {
+            GameMap destinationMap = destination.map();
+            actions.add(new TeleportAction(destination, destinationMap));
         }
 
         return actions; // Return the list of allowable actions
