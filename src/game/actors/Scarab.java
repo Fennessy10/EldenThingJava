@@ -126,7 +126,7 @@ public class Scarab extends Actor implements Consumable {
             }
         }
 
-        CrimsonTear crimsonTear = new CrimsonTear("Crimson Tear", '*', true);
+        CrimsonTear crimsonTear = new CrimsonTear();
         scarabLocation.addItem(crimsonTear);
         return result;
     }
