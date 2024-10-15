@@ -3,7 +3,7 @@ package game.weapons;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.weapons.IntrinsicWeapon;
-import game.effects.ManFlyPoisonEffect;
+import game.effects.PoisonedEffect;
 
 import java.util.Random;
 
@@ -39,7 +39,7 @@ public class ManFlyStinger extends IntrinsicWeapon {
             return attacker + " misses " + target + ".";
         }
         if(random.nextInt(100) < poisonStingChance){
-            target.addStatusEffect(new ManFlyPoisonEffect()); //if poison on add effect on player
+            target.addStatusEffect(new PoisonedEffect(10, 2)); //if poison on add effect on player
             return ("actor hits target and poison applied to " + target);
         }
         target.hurt(damage);

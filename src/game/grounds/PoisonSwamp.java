@@ -26,7 +26,7 @@ public class PoisonSwamp extends Ground {
     public void tick(Location location) {
         if (location.containsAnActor()) {
             Actor actor = location.getActor();
-            actor.addStatusEffect(new PoisonedEffect());
+            actor.addStatusEffect(new PoisonedEffect(5, 3));
         }
     }
 }
