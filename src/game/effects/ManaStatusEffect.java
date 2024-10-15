@@ -8,7 +8,7 @@ import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.positions.Location;
 
 /**
- * Represents a status effect that causes an actor to gana mana overtime or gain mana temporarily depending on whether the ability
+ * Represents a status effect that causes an actor to gain mana overtime or gain mana temporarily depending on whether the ability
  * is labelled as recurrent or not as the last parameter
  */
 public class ManaStatusEffect extends StatusEffect {
