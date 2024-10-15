@@ -14,6 +14,42 @@
 https://docs.google.com/spreadsheets/d/17MC-oyd58HjysaHH6ObEFYZYA8MCO7U8iM7XUoy2hFA/edit?usp=sharing
 
 ## A3 Req4 creative idea
-A day/night system that consists of morning/afternoon/evening/night. Each time of day has different effects on the world. At
-night, the spirit enemy deals greater damage to the tarnished, whereas during the day, the furnace golem deals greater damage
-and fire deals greater damage. Additionally, there is a boss named Godfrey that controls the time of day.
+A weather system that consists of sunny, raining and snowing. 
+To do this there is an atmosphere class controls the weather effect based on a “rand” number which is executed by an actor.  
+
+
+Weather Enums:
+RAINY
+SUNNY
+SNOWING
+
+
+Weather Affected Lower Level Classes:
+
+Mud
+When the weather is RAINY, players are applied with a ‘stuck’ StatusEffect if they stand on mud, which results in them doing
+nothing for three turns. I.e. they can not move away from approaching enemies
+When the weather is SUNNY, the mud dries up, the character is changed to ‘~’ and there is no longer a risk for players to get
+stuck in the mud
+
+WeatherMan
+A new type of enemy that has an katana intrinsic weapon 
+when the weather is SNOWING -> deals 50 damage
+When its RAINY he deals 30 damage and causes poison effect lasting 3 turns
+When it is SUNNY, he deals 30 damage and causes a burning effect lasting 3 turns
+
+Axe
+When its RAINY the axe deals 30 damage and causes a poison effect lasting 3 turns
+When it's Sunny the axe deals 30 damage and causes a burning effect lasting 3 turns
+when the weather is SNOWING -> deals 50 damage
+
+WeatherWizard
+Wanders around and randomly changes the weather
+When killed, another WeatherWizard spawns nearby
+
+
+
+
+
+
+
