@@ -12,3 +12,8 @@
 
 ## Contribution Log
 https://docs.google.com/spreadsheets/d/17MC-oyd58HjysaHH6ObEFYZYA8MCO7U8iM7XUoy2hFA/edit?usp=sharing
+
+## A3 Req4 creative idea
+A day/night system that consists of morning/afternoon/evening/night. Each time of day has different effects on the world. At
+night, certain enemies are more aggressive, dealing greater damage to the tarnished. Additionally, there is a boss named Godfrey
+that controls the time of day.
