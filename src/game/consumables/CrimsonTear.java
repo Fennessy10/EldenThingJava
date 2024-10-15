@@ -5,7 +5,7 @@ import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.items.Item;
 import edu.monash.fit2099.engine.positions.GameMap;
 import game.actions.ConsumeAction;
-import game.enums.HealingStatusEffect;
+import game.effects.HealingStatusEffect;
 
 public class CrimsonTear extends Item implements Consumable{
 

@@ -1,25 +1,14 @@
 package game.actors;
 
 
-import edu.monash.fit2099.engine.actions.Action;
 import edu.monash.fit2099.engine.actions.ActionList;
 import edu.monash.fit2099.engine.actors.Actor;
-import edu.monash.fit2099.engine.displays.Display;
-import edu.monash.fit2099.engine.positions.Exit;
 import edu.monash.fit2099.engine.positions.GameMap;
 import game.actions.AttackAction;
 import game.behaviours.FollowBehaviour;
-import game.behaviours.WanderBehaviour;
-import edu.monash.fit2099.engine.positions.Location;
 import game.enums.Ability;
-import game.enums.ManFlyPoisonEffect;
 import game.enums.Status;
 import game.weapons.ManFlyStinger;
-import game.weapons.StompingFoot;
-
-import java.util.AbstractMap;
-import java.util.Map;
-import java.util.Random;
 
 /**
  * New actor class for man_fly which wandering in the sewers

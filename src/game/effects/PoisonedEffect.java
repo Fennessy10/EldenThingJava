@@ -1,11 +1,10 @@
-package game.enums;
+package game.effects;
 
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.actors.StatusEffect;
 import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.positions.Location;
-
-import java.util.ArrayList;
+import game.enums.Ability;
 
 /**
  * Class that extends StatusEffect abstract class and represents the poisoned effect applied to actors who traverse over a PoisonSwamp

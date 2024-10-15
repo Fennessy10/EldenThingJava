@@ -15,8 +15,8 @@ import game.behaviours.WanderBehaviour;
 import game.consumables.Consumable;
 import game.consumables.CrimsonTear;
 import game.enums.Ability;
-import game.enums.HealingStatusEffect;
-import game.enums.ManaStatusEffect;
+import game.effects.HealingStatusEffect;
+import game.effects.ManaStatusEffect;
 import game.enums.Status;
 
 import java.util.ArrayList;

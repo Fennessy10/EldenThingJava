@@ -1,13 +1,9 @@
 package game.weapons;
 
-import edu.monash.fit2099.engine.actions.Action;
 import edu.monash.fit2099.engine.actors.Actor;
-import edu.monash.fit2099.engine.positions.Exit;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.weapons.IntrinsicWeapon;
-import game.actions.AttackAction;
-import game.enums.ManFlyPoisonEffect;
-import game.enums.Status;
+import game.effects.ManFlyPoisonEffect;
 
 import java.util.Random;
 
