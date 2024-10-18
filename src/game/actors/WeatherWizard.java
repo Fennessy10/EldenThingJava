@@ -55,13 +55,14 @@ public class WeatherWizard extends Actor implements WeatherAffected {
      */
     @Override
     public Action playTurn(ActionList actions, Action lastAction, GameMap map, Display display) {
+        atmosphere.changeWeather();
+        display.println("WeatherWizard chooses: " + atmosphere.getCurrentWeather());
+        this.reactToWeather(atmosphere.getCurrentWeather());
         for (Behaviour behaviour : weatherWizardBehaviours.values()) {
             Action action = behaviour.getAction(this, map);
             if (action != null)
                 return action;
         }
-        atmosphere.changeWeather();
-        this.reactToWeather(atmosphere.getCurrentWeather());
         return new DoNothingAction();
     }
 
@@ -87,8 +88,6 @@ public class WeatherWizard extends Actor implements WeatherAffected {
 
     /**
      * If the WeatherWizard somehow dies they explode and a new WeatherWizard spawns
-     * Also handles implementation of follow behaviour by checking if a followable actor enters its
-     * surroundings, and if so, adds follow behaviour to actor's hashmap of behaviours.
      *
      * @param map        current GameMap
      * @return An ActionList of available actions an actor can perform on the Scarab

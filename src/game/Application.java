@@ -12,6 +12,7 @@ import edu.monash.fit2099.engine.positions.Location;
 import edu.monash.fit2099.engine.positions.World;
 import game.actors.FurnaceGolem;
 import game.actors.Player;
+import game.actors.WeatherWizard;
 import game.grounds.Gate;
 import game.displays.FancyMessage;
 import game.grounds.*;
@@ -20,9 +21,8 @@ import game.consumables.FlaskOfRejuvenation;
 import game.consumables.ShadowTreeFragment;
 import game.spawners.ManFlySpawner;
 import game.spawners.SpiritSpawner;
-import game.weapons.GreatKnife;import game.weapons.LifeSteal;
-import game.weapons.Quickstep;
-import game.weapons.ShortSword;
+import game.weapons.*;
+import game.weather.Atmosphere;
 
 /**
  * The main class to start the game.
@@ -141,6 +141,9 @@ public class Application {
         GreatKnife greatKnife2 = new GreatKnife(new LifeSteal());
         gameMap.at(15, 6).addItem(greatKnife2);
 
+        TallAxe tallAxe = new TallAxe(new LifeSteal());
+        gameMap.at(3, 8).addItem(tallAxe);
+
         FlaskOfHealing flaskOfHealing = new FlaskOfHealing();
         gameMap.at(10, 9).addItem(flaskOfHealing);
 
@@ -167,6 +170,9 @@ public class Application {
         beluratTowerMap.at(26,6).setGround(new Graveyard(new SpiritSpawner()));
 
         beluratSewersMap.at(19,4).setGround(new Graveyard(new ManFlySpawner()));
+
+        gameMap.at(42, 8).addActor(new WeatherWizard(new Atmosphere()));
+
 
         world.run();
 

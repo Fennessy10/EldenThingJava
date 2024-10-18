@@ -9,6 +9,9 @@ public class Atmosphere {
 
     public Atmosphere() {
         changeWeather();
+        if (currentWeather == null) {
+            currentWeather = Weather.SUNNY; // Default weather
+        }
     }
 
     /**
@@ -17,7 +20,10 @@ public class Atmosphere {
     public void changeWeather() {
         Weather[] weatherConditions = Weather.values();
         Random rand = new Random();
-        this.currentWeather = weatherConditions[rand.nextInt(weatherConditions.length)];
+        if (rand.nextInt(20)<3) {
+            this.currentWeather = weatherConditions[rand.nextInt(weatherConditions.length)];
+        }
+
     }
 
     /**
