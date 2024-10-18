@@ -26,7 +26,7 @@ SNOWING
 
 Weather Affected Lower Level Classes:
 
-WeatherMan
+WeatherWarrior
 A new type of enemy that has an katana intrinsic weapon 
 when the weather is SNOWING -> deals 50 damage
 When its RAINY he deals 30 damage and causes poison effect lasting 3 turns
