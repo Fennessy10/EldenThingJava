@@ -22,7 +22,7 @@ public class TallAxe extends WeaponItem implements WeatherAffected {
     @Override
     public void reactToWeather(Weather currentWeather) {
         switch (currentWeather) {
-            case SUNNY -> this.addCapability(Ability.FIREY);
+            case SUNNY -> this.addCapability(Ability.FIERY);
             case RAINY -> this.addCapability(Ability.DOUSED);
             case SNOWY -> tallAxeDamage = 100;
         }

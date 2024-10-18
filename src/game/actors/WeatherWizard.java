@@ -10,27 +10,25 @@ import edu.monash.fit2099.engine.positions.Exit;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.Location;
 import game.actions.AttackAction;
-import game.actions.ConsumeAction;
 import game.behaviours.WanderBehaviour;
 import game.enums.Ability;
 import game.enums.Status;
 import game.enums.Weather;
 import game.weather.Atmosphere;
+import game.weather.WeatherAffected;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import static game.enums.Weather.SUNNY;
-
 /**
  * it wanders around and changes the weather. The creature contains many treasures
  */
-public class WeatherWizard extends Actor {
+public class WeatherWizard extends Actor implements WeatherAffected {
     private final Map<Integer, Behaviour> weatherWizardBehaviours = new HashMap<>();
     private final static int weatherWizardHP = 50;
-    private Atmosphere atmosphere;
+    private final Atmosphere atmosphere;
 
     /**
      * The constructor of the WeatherWizard class
@@ -38,6 +36,7 @@ public class WeatherWizard extends Actor {
      */
     public WeatherWizard(Atmosphere atmosphere) {
         super("WeatherWizard", '^', weatherWizardHP);
+        this.atmosphere = atmosphere;
         this.weatherWizardBehaviours.put(999, new WanderBehaviour());
         this.addCapability(Ability.POISON_RESISTANT);
         this.addCapability(Ability.FIRE_RESISTANT);
@@ -61,6 +60,8 @@ public class WeatherWizard extends Actor {
             if (action != null)
                 return action;
         }
+        atmosphere.changeWeather();
+        this.reactToWeather(atmosphere.getCurrentWeather());
         return new DoNothingAction();
     }
 
@@ -124,4 +125,13 @@ public class WeatherWizard extends Actor {
     }
 
 
+    /**
+     * Reacts to changes in weather.
+     *
+     * @param currentWeather the current weather condition.
+     */
+    @Override
+    public void reactToWeather(Weather currentWeather) {
+
+    }
 }

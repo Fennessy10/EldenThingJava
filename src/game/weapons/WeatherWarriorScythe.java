@@ -20,7 +20,7 @@ public class WeatherWarriorScythe extends IntrinsicWeapon{
     }
 
     /**
-     * attack action method only for man_fly
+     * attack action method only for WeatherWarrior
      * 25% chance to hit player, if hit on target, have 30% chance to cause poison effect
      *
      * @param attacker the actor who performed the attack
