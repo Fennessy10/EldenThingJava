@@ -13,7 +13,7 @@ import edu.monash.fit2099.engine.positions.Location;
  */
 
 public class HealingStatusEffect extends StatusEffect {
-    private final int Duration;
+    private final int duration;
     private final int healAmount;
     private int healingCount = 0;
     private final boolean recurrent;
@@ -25,7 +25,7 @@ public class HealingStatusEffect extends StatusEffect {
      */
     public HealingStatusEffect(Actor actor, int Duration, int healAmount,  Boolean recurrent) {
         super("Healing");
-        this.Duration = Duration;
+        this.duration = Duration;
         this.healAmount = healAmount;
         this.recurrent = recurrent;
         if (!recurrent) {
@@ -48,7 +48,7 @@ public class HealingStatusEffect extends StatusEffect {
         }
 
 
-        if (healingCount == Duration) { // The player heals only for every tick
+        if (healingCount == duration) { // The player heals only for every tick
             if (!recurrent) {
                 actor.modifyAttributeMaximum(BaseActorAttributes.HEALTH, ActorAttributeOperations.DECREASE, healAmount);
             }

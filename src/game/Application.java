@@ -97,6 +97,9 @@ public class Application {
         // Creating a gate for Gravestite Plains to allow actors travel between maps.
         Gate gravestiteGate = new Gate();
 
+        Atmosphere atmosphere = new Atmosphere();
+        gameMap.at(42, 8).addActor(new WeatherWizard(atmosphere));
+
         // Adding possible destination locations actor can travel to, to the Gate
         gravestiteGate.addDestination(beluratTowerMap.at(11,0));
         gravestiteGate.addDestination(beluratSewersMap.at(4,5));
@@ -141,8 +144,8 @@ public class Application {
         GreatKnife greatKnife2 = new GreatKnife(new LifeSteal());
         gameMap.at(15, 6).addItem(greatKnife2);
 
-        TallAxe tallAxe = new TallAxe(new LifeSteal());
-        gameMap.at(3, 8).addItem(tallAxe);
+        TallAxe tallAxe = new TallAxe(new LifeSteal(), atmosphere);
+        gameMap.at(21, 8).addItem(tallAxe);
 
         FlaskOfHealing flaskOfHealing = new FlaskOfHealing();
         gameMap.at(10, 9).addItem(flaskOfHealing);
@@ -171,7 +174,7 @@ public class Application {
 
         beluratSewersMap.at(19,4).setGround(new Graveyard(new ManFlySpawner()));
 
-        gameMap.at(42, 8).addActor(new WeatherWizard(new Atmosphere()));
+
 
 
         world.run();

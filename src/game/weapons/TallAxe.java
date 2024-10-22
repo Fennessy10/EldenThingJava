@@ -5,6 +5,7 @@ import edu.monash.fit2099.engine.positions.GameMap;
 import game.effects.BurningStatusEffect;
 import game.effects.PoisonedEffect;
 import game.enums.Weather;
+import game.weather.Atmosphere;
 import game.weather.WeatherAffected;
 
 import java.util.Random;
@@ -20,12 +21,14 @@ public class TallAxe extends WeaponItem implements WeatherAffected {
     private static final int poisonDamage = 5;
     private static final int poisonDuration = 1;
     private static final int extraIceDamage = 20;
+    private final Atmosphere atmosphere;
 
     private Weather weather;
 
-    public TallAxe(WeaponArt weaponArt) {
+    public TallAxe(WeaponArt weaponArt, Atmosphere atmosphere) {
         super(weaponName, displayChar, baseDamage, verb, hitRate, strengthRequirement);
         this.setWeaponArt(weaponArt);
+        this.atmosphere = atmosphere;
     }
 
     /**
@@ -48,6 +51,10 @@ public class TallAxe extends WeaponItem implements WeatherAffected {
      */
     @Override
     public String attack(Actor attacker, Actor target, GameMap map) {
+        // Ensure weather is not null, defaulting to SUNNY if it is
+        Weather currentWeather = atmosphere.getCurrentWeather();
+        System.out.println("Current weather in attack(): " + currentWeather); // Debug log
+
         int currentDamage = baseDamage;  // Local damage variable to avoid modifying the original value
         Random rand = new Random();
         String result = "";
@@ -58,7 +65,7 @@ public class TallAxe extends WeaponItem implements WeatherAffected {
         }
 
         // Apply weather-based effects
-        switch (weather) {
+        switch (currentWeather) {
             case SUNNY -> target.addStatusEffect(new BurningStatusEffect());
             case RAINY -> target.addStatusEffect(new PoisonedEffect(poisonDamage, poisonDuration));
             case SNOWY -> currentDamage += extraIceDamage;  // Increase local damage
