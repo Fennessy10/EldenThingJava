@@ -12,7 +12,7 @@ import java.util.Random;
 
 public class TallAxe extends WeaponItem implements WeatherAffected {
     private static final int baseDamage = 70;
-    private static final int hitRate = 80;
+    private static final int hitRate = 75;
     private static final int strengthRequirement = 15;
     private static final String verb = "attack";
     private static final char displayChar = '‡';
@@ -26,9 +26,8 @@ public class TallAxe extends WeaponItem implements WeatherAffected {
     private final Atmosphere atmosphere;
     private Weather weather;
 
-    public TallAxe(WeaponArt weaponArt, Atmosphere atmosphere) {
+    public TallAxe(Atmosphere atmosphere) {
         super(weaponName, displayChar, baseDamage, verb, hitRate, strengthRequirement);
-        this.setWeaponArt(weaponArt);
         this.atmosphere = atmosphere;
         this.weather = atmosphere.getCurrentWeather();  // Initialize with current weather
     }

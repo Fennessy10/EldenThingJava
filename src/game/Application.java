@@ -144,7 +144,7 @@ public class Application {
         GreatKnife greatKnife2 = new GreatKnife(new LifeSteal());
         gameMap.at(15, 6).addItem(greatKnife2);
 
-        TallAxe tallAxe = new TallAxe(new LifeSteal(), atmosphere);
+        TallAxe tallAxe = new TallAxe(atmosphere);
         gameMap.at(21, 8).addItem(tallAxe);
 
         FlaskOfHealing flaskOfHealing = new FlaskOfHealing();
@@ -173,6 +173,8 @@ public class Application {
         beluratTowerMap.at(26,6).setGround(new Graveyard(new SpiritSpawner()));
 
         beluratSewersMap.at(19,4).setGround(new Graveyard(new ManFlySpawner()));
+
+
 
 
 
