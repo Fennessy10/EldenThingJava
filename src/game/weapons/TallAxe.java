@@ -22,7 +22,7 @@ public class TallAxe extends WeaponItem implements WeatherAffected {
     private static final int poisonDuration = 3;
     private static final int burnDamage = 10;
     private static final int burnDuration = 3;
-    private static final int extraIceDamage = 20;
+    private static final int extraIceDamage = 40;
     private final Atmosphere atmosphere;
     private Weather weather;
 
