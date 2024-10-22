@@ -18,44 +18,33 @@ public class TallAxe extends WeaponItem implements WeatherAffected {
     private static final char displayChar = '‡';
     private static final String weaponName = "TallAxe";
     private static final float damageMultiplier = 1.0f;
-    private static final int poisonDamage = 5;
-    private static final int poisonDuration = 1;
+    private static final int poisonDamage = 10;
+    private static final int poisonDuration = 3;
+    private static final int burnDamage = 10;
+    private static final int burnDuration = 3;
     private static final int extraIceDamage = 20;
     private final Atmosphere atmosphere;
-
     private Weather weather;
 
     public TallAxe(WeaponArt weaponArt, Atmosphere atmosphere) {
         super(weaponName, displayChar, baseDamage, verb, hitRate, strengthRequirement);
         this.setWeaponArt(weaponArt);
         this.atmosphere = atmosphere;
+        this.weather = atmosphere.getCurrentWeather();  // Initialize with current weather
     }
 
-    /**
-     * Reacts to changes in weather.
-     *
-     * @param currentWeather the current weather condition.
-     */
     @Override
     public void reactToWeather(Weather currentWeather) {
-        weather = currentWeather;
+        this.weather = currentWeather;
+        System.out.println("TallAxe reacting to weather: " + currentWeather); // Debug log
     }
 
-    /**
-     * Executes an attack with this weapon.
-     *
-     * @param attacker The actor attacking.
-     * @param target   The actor being attacked.
-     * @param map      The game map where the attack occurs.
-     * @return A string describing the outcome of the attack.
-     */
     @Override
     public String attack(Actor attacker, Actor target, GameMap map) {
-        // Ensure weather is not null, defaulting to SUNNY if it is
-        Weather currentWeather = atmosphere.getCurrentWeather();
-        System.out.println("Current weather in attack(): " + currentWeather); // Debug log
+        // React to the latest weather before attacking
+        reactToWeather(atmosphere.getCurrentWeather());
 
-        int currentDamage = baseDamage;  // Local damage variable to avoid modifying the original value
+        int currentDamage = baseDamage;
         Random rand = new Random();
         String result = "";
 
@@ -64,14 +53,12 @@ public class TallAxe extends WeaponItem implements WeatherAffected {
             return result;
         }
 
-        // Apply weather-based effects
-        switch (currentWeather) {
-            case SUNNY -> target.addStatusEffect(new BurningStatusEffect());
+        switch (weather) {
+            case SUNNY -> target.addStatusEffect(new BurningStatusEffect(burnDamage, burnDuration));
             case RAINY -> target.addStatusEffect(new PoisonedEffect(poisonDamage, poisonDuration));
-            case SNOWY -> currentDamage += extraIceDamage;  // Increase local damage
+            case SNOWY -> currentDamage += extraIceDamage;
         }
 
-        // Apply the damage to the target
         target.hurt(Math.round(currentDamage * damageMultiplier));
         result += String.format("\n%s %s %s for %d damage", attacker, verb, target, currentDamage);
 
