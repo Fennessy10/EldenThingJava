@@ -12,8 +12,8 @@ import game.weather.WeatherAffected;
 import java.util.Random;
 
 public class WeatherWarriorScythe extends IntrinsicWeapon implements WeatherAffected {
-    private final static int weatherWarriorDamage = 20;
-    private final static String weatherWarriorVerb = "stings";
+    private final static int weatherWarriorDamage = 30;
+    private final static String weatherWarriorVerb = "slices";
     private final static int weatherWarriorHitRate = 90;
     private static final int poisonDamage = 5;
     private static final int poisonDuration = 2;
@@ -68,7 +68,7 @@ public class WeatherWarriorScythe extends IntrinsicWeapon implements WeatherAffe
             case SNOWY -> currentDamage += extraIceDamage;
         }
 
-        target.hurt(damage);
+        target.hurt(currentDamage);
 
         return String.format("%s %s %s for %d damage", attacker, verb, target, damage);
     }
