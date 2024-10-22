@@ -9,14 +9,16 @@ import game.actions.AttackAction;
 import game.behaviours.FollowBehaviour;
 import game.enums.Ability;
 import game.enums.Status;
+import game.enums.Weather;
 import game.weapons.ManFlyStinger;
 import game.weapons.WeatherWarriorScythe;
+import game.weather.WeatherAffected;
 
 /**
  * New actor class for WeatherWarrior which wandering in the sewers
  * WeatherWarrior can attack nearby actors by poison and following it
  */
-public class WeatherWarrior extends Enemy {
+public class WeatherWarrior extends Enemy implements WeatherAffected {
     private static final int weatherWarriorHP = 90;
     private static final char displayChar = '¤';
     private static final String name = "WeatherWarrior";
@@ -34,6 +36,15 @@ public class WeatherWarrior extends Enemy {
     }
 
 
+    /**
+     * Reacts to changes in weather.
+     *
+     * @param currentWeather the current weather condition.
+     */
+    @Override
+    public void reactToWeather(Weather currentWeather) {
+
+    }
     /**
      * Determine allowable action towards WeatherWarrior
      *
@@ -54,5 +65,6 @@ public class WeatherWarrior extends Enemy {
         }
         return actions;
     }
+
 
 }
