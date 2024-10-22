@@ -25,12 +25,12 @@ public class WeatherWarrior extends Enemy {
      * constructor for WeatherWarrior
      * initialize it behaviour, char and hit point(50)
      */
-    public WeatherWarrior() {
+    public WeatherWarrior(WeatherWarriorScythe weatherWarriorScythe) {
         super(name, displayChar, weatherWarriorHP);
         this.addCapability(Status.ENEMY);
         this.addCapability(Ability.POISON_RESISTANT);
         this.addCapability(Ability.FIRE_RESISTANT);
-        this.setIntrinsicWeapon(new WeatherWarriorScythe());
+        this.setIntrinsicWeapon(weatherWarriorScythe);
     }
 
 
