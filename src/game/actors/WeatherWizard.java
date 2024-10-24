@@ -56,7 +56,7 @@ public class WeatherWizard extends Actor implements WeatherAffected {
     @Override
     public Action playTurn(ActionList actions, Action lastAction, GameMap map, Display display) {
         atmosphere.changeWeather();
-        display.println("WeatherWizard chooses: " + atmosphere.getCurrentWeather());
+        display.println("WeatherWizard chooses: " + atmosphere.getCurrentWeather() + " for the next turn");
         this.reactToWeather(atmosphere.getCurrentWeather());
         for (Behaviour behaviour : weatherWizardBehaviours.values()) {
             Action action = behaviour.getAction(this, map);

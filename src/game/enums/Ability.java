@@ -6,7 +6,5 @@ package game.enums;
  */
 public enum Ability {
     FIRE_RESISTANT,
-    POISON_RESISTANT,
-    FIERY,
-    DOUSED
+    POISON_RESISTANT
 }
