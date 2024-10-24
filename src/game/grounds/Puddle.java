@@ -4,6 +4,7 @@ import edu.monash.fit2099.engine.actions.Action;
 import edu.monash.fit2099.engine.actions.ActionList;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.actors.attributes.ActorAttributeOperations;
+import edu.monash.fit2099.engine.actors.attributes.BaseActorAttribute;
 import edu.monash.fit2099.engine.actors.attributes.BaseActorAttributes;
 import edu.monash.fit2099.engine.positions.Exit;
 import edu.monash.fit2099.engine.positions.GameMap;
@@ -12,7 +13,9 @@ import edu.monash.fit2099.engine.positions.Location;
 import game.actions.ConsumeAction;
 import game.consumables.Consumable;
 import game.actors.Scarab;
+import game.effects.WetStatusEffect;
 import game.enums.Ability;
+import game.enums.Status;
 
 import java.util.Random;
 
@@ -21,7 +24,6 @@ import java.util.Random;
  * Consuming the water restores mana and has a chance to spawn a scarab.
  */
 public class Puddle extends Ground implements Consumable {
-
     /**
      * Constructor for the Puddle class.
      * Initializes with '~' character and the name "Puddle".
@@ -41,6 +43,10 @@ public class Puddle extends Ground implements Consumable {
     @Override
     public ActionList allowableActions(Actor actor, Location location, String direction) {
         ActionList actions = new ActionList();
+
+        // Check if the actor is on the puddle and update their wet status
+        isWet(location.map(), actor);
+
         if (location.containsAnActor() && actor.equals(location.getActor())) {
             // Add the ConsumeAction if the actor is directly on the puddle.
             actions.add(new ConsumeAction(this));
@@ -74,7 +80,14 @@ public class Puddle extends Ground implements Consumable {
 
         return String.format("The puddle was consumed by %s. %s feels a surge of mana.", actor, actor);
     }
+    private void isWet(GameMap map, Actor actor) {
+        Location actorLocation = map.locationOf(actor);
+        Ground standingOnGround = actorLocation.getGround();
+        if (standingOnGround == this) {
+            actor.addStatusEffect(new WetStatusEffect());
 
+        }
+    }
     /**
      * Helper method to find a suitable location for spawning a scarab within the surrounding area.
      * @param map The map where the actor is located.
