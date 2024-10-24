@@ -12,4 +12,5 @@ public enum Status {
     BURNABLE_GROUND,
     ENEMY,
     FOLLOW,
+    WET,
 }
