@@ -14,14 +14,15 @@
 https://docs.google.com/spreadsheets/d/17MC-oyd58HjysaHH6ObEFYZYA8MCO7U8iM7XUoy2hFA/edit?usp=sharing
 
 ## A3 Req4 creative idea
-A weather system that consists of sunny, raining and snowing. 
-To do this there is an atmosphere class controls the weather effect based on a “rand” number which is executed by an actor.  
+A weather system that consists of sunny, raining and snowing.
+To do this there is an atmosphere class controls the weather effect based on a “rand” number which is executed by 
+the WeatherWizard. These three are put into the enum "Weather" enum: sunny, raining and snowing.
 
 
 Weather Enums:
 RAINY
 SUNNY
-SNOWING
+SNOWY
 
 
 Weather Affected Lower Level Classes:

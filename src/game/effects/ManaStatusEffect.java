@@ -12,7 +12,7 @@ import edu.monash.fit2099.engine.positions.Location;
  * is labelled as recurrent or not as the last parameter
  */
 public class ManaStatusEffect extends StatusEffect {
-    private final int Duration;
+    private final int duration;
     private final int manaAmount;
     private int Count = 0;
 
@@ -22,7 +22,7 @@ public class ManaStatusEffect extends StatusEffect {
      */
     public ManaStatusEffect(Actor actor, int Duration, int manaAmount) {
         super("Healing");
-        this.Duration = Duration;
+        this.duration = Duration;
         this.manaAmount = manaAmount;
         actor.modifyAttributeMaximum(BaseActorAttributes.MANA, ActorAttributeOperations.INCREASE, manaAmount);
         new Display().println(String.format("\nThe %s had their max mana increased for %d !", actor, manaAmount));
@@ -37,7 +37,7 @@ public class ManaStatusEffect extends StatusEffect {
     @Override
     public void tick(Location location, Actor actor) {
         Count++;
-        if (Count == Duration) {
+        if (Count == duration) {
             actor.modifyAttributeMaximum(BaseActorAttributes.MANA, ActorAttributeOperations.DECREASE, manaAmount);
             actor.removeStatusEffect(this);
             Count = 0;

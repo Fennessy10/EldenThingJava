@@ -12,6 +12,7 @@ import edu.monash.fit2099.engine.positions.Location;
 import edu.monash.fit2099.engine.positions.World;
 import game.actors.FurnaceGolem;
 import game.actors.Player;
+import game.actors.WeatherWizard;
 import game.grounds.Gate;
 import game.displays.FancyMessage;
 import game.grounds.*;
@@ -20,9 +21,8 @@ import game.consumables.FlaskOfRejuvenation;
 import game.consumables.ShadowTreeFragment;
 import game.spawners.ManFlySpawner;
 import game.spawners.SpiritSpawner;
-import game.weapons.GreatKnife;import game.weapons.LifeSteal;
-import game.weapons.Quickstep;
-import game.weapons.ShortSword;
+import game.weapons.*;
+import game.weather.Atmosphere;
 
 /**
  * The main class to start the game.
@@ -97,6 +97,9 @@ public class Application {
         // Creating a gate for Gravestite Plains to allow actors travel between maps.
         Gate gravestiteGate = new Gate();
 
+        Atmosphere atmosphere = new Atmosphere();
+        gameMap.at(42, 8).addActor(new WeatherWizard(atmosphere));
+
         // Adding possible destination locations actor can travel to, to the Gate
         gravestiteGate.addDestination(beluratTowerMap.at(11,0));
         gravestiteGate.addDestination(beluratSewersMap.at(4,5));
@@ -127,7 +130,7 @@ public class Application {
             }
         }
 
-        Player player = new Player("Tarnished", '@', 150, 10, 100);
+        Player player = new Player("Tarnished", '@', 1500, 10, 100);
         world.addPlayer(player, gameMap.at(7, 4));
 
         // Place the ShortSword at coordinates (x=7, y=8)
@@ -140,6 +143,9 @@ public class Application {
 
         GreatKnife greatKnife2 = new GreatKnife(new LifeSteal());
         gameMap.at(15, 6).addItem(greatKnife2);
+
+        TallAxe tallAxe = new TallAxe(new LifeSteal(), atmosphere);
+        gameMap.at(21, 8).addItem(tallAxe);
 
         FlaskOfHealing flaskOfHealing = new FlaskOfHealing();
         gameMap.at(10, 9).addItem(flaskOfHealing);
@@ -167,6 +173,9 @@ public class Application {
         beluratTowerMap.at(26,6).setGround(new Graveyard(new SpiritSpawner()));
 
         beluratSewersMap.at(19,4).setGround(new Graveyard(new ManFlySpawner()));
+
+
+
 
         world.run();
 

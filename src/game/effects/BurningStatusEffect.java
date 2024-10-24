@@ -4,6 +4,7 @@ import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.positions.Location;
 import edu.monash.fit2099.engine.actors.StatusEffect;
+import game.enums.Ability;
 
 /**
  * Represents a status effect that causes an actor to take burning damage.
@@ -11,12 +12,16 @@ import edu.monash.fit2099.engine.actors.StatusEffect;
  */
 public class BurningStatusEffect extends StatusEffect {
     private int burningTurns = 0;
+    private final int burnDamage;
+    private final int burningDuration;
 
     /**
      * Constructor
      */
-    public BurningStatusEffect() {
+    public BurningStatusEffect(int burningDamage, int burningDuration) {
         super("Burning");
+        this.burnDamage = burningDamage;
+        this.burningDuration = burningDuration;
     }
 
     /**
@@ -28,14 +33,15 @@ public class BurningStatusEffect extends StatusEffect {
      */
     @Override
     public void tick(Location location, Actor actor) {
-        int burnDamage = 5;
-        burningTurns++;
-        actor.hurt(burnDamage); // Apply 5 damage for being on burning ground
-        new Display().println(String.format("\nThe explosion burns %s for %d damage!", actor, burnDamage));
+        if (!actor.hasCapability(Ability.FIRE_RESISTANT)) {
+            burningTurns++;
+            actor.hurt(burnDamage); // Apply 5 damage for being on burning ground
+            new Display().println(String.format("the " + actor + " is burned for " + burnDamage + " damage!"));
 
-        if (burningTurns == 1) { // The player burns only for every tick they spend on the burning ground
-            actor.removeStatusEffect(this);
-            burningTurns = 0; // Reset burning turns
+            if (burningTurns == burningDuration) { // The player burns only for every tick they spend on the burning ground
+                actor.removeStatusEffect(this);
+                burningTurns = 0; // Reset burning turns
+            }
         }
     }
 }

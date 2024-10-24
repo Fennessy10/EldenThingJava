@@ -36,7 +36,7 @@ public class Fire extends Item {
         if (location.containsAnActor()) {
             Actor actor = location.getActor();
                 if (!actor.hasCapability(Ability.FIRE_RESISTANT)) {
-                    actor.addStatusEffect(new BurningStatusEffect());
+                    actor.addStatusEffect(new BurningStatusEffect(5, 1));
             }
         }
     }

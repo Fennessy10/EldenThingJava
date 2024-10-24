@@ -24,7 +24,7 @@ public class ShadowTreeFragment extends Item implements Consumable {
      * Initializes the ShadowTreeFragment with a name and display character.
      */
     public ShadowTreeFragment() {
-        super("ShadowTree Fragment", 's', true);
+        super("ShadowTree Fragment", 'e', true);
     }
 
     /**
