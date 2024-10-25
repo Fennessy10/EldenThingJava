@@ -58,6 +58,7 @@ public class DivineBeast extends Enemy {
 
     @Override
     public String unconscious(Actor actor, GameMap map) {
+
         Location escapeGateLocation = map.locationOf(dancePartner);
         int x_coord = escapeGateLocation.x();
         int y_coord = escapeGateLocation.y();

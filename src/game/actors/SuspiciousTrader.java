@@ -43,7 +43,7 @@ public class SuspiciousTrader extends Actor {
         ActionList actions = new ActionList();
         //if actor is player, can trade with him
         if (otherActor.hasCapability(Status.HOSTILE_TO_ENEMY)) {
-            //actions.add(new TradeAction(this,trader));
+            actions.add(new TradeAction(this));
         }
         return actions;
     }
