@@ -13,4 +13,5 @@ public enum Status {
     ENEMY,
     FOLLOW,
     WET,
+    FRIENDLY,
 }
