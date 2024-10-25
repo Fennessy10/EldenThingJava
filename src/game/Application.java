@@ -12,6 +12,7 @@ import edu.monash.fit2099.engine.positions.Location;
 import edu.monash.fit2099.engine.positions.World;
 import game.actors.FurnaceGolem;
 import game.actors.Player;
+import game.actors.SuspiciousTrader;
 import game.actors.WeatherWizard;
 import game.grounds.Gate;
 import game.displays.FancyMessage;
@@ -174,7 +175,8 @@ public class Application {
 
         beluratSewersMap.at(19,4).setGround(new Graveyard(new ManFlySpawner()));
 
-
+        SuspiciousTrader suspiciousTrader = new SuspiciousTrader();
+        gameMap.at(7, 4).addActor(suspiciousTrader);
 
 
         world.run();
