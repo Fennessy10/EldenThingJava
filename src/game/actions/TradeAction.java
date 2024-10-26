@@ -10,6 +10,7 @@ import game.actors.SuspiciousTrader;
 import game.effects.HealingStatusEffect;
 import game.enums.ItemCapability;
 import game.weapons.DivineBeastHead;
+import game.weapons.FurnaceEngine;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -60,8 +61,8 @@ public class TradeAction extends Action{
             else if (item.hasCapability(ItemCapability.REMEMBRANCE_OF_FURNACE_GOLEM)){
                 actor.removeItemFromInventory(item); //remove remembrance
 
-                //FurnaceEngine furnaceEngine = new FurnaceEngine();
-                //actor.addItemToInventory(furnaceEngine);
+                FurnaceEngine furnaceEngine = new FurnaceEngine();
+                actor.addItemToInventory(furnaceEngine);
 
                 actor.addStatusEffect(new HealingStatusEffect(actor, /*duration*/ 5, /*healAmount*/ 30, /*recurrent*/ true));
 
