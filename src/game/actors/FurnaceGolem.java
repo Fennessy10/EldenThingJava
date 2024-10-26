@@ -1,21 +1,14 @@
 package game.actors;
 
-import edu.monash.fit2099.engine.actions.Action;
 import edu.monash.fit2099.engine.actions.ActionList;
-import edu.monash.fit2099.engine.actions.DoNothingAction;
 import edu.monash.fit2099.engine.actors.Actor;
-import edu.monash.fit2099.engine.actors.Behaviour;
-import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.positions.GameMap;
 import game.enums.Ability;
 import game.enums.Status;
-import game.behaviours.WanderBehaviour;
 import game.actions.AttackAction;
 import game.behaviours.FollowBehaviour;
+import game.items.RemembranceOfTheFurnaceGolem;
 import game.weapons.StompingFoot;
-
-import java.util.Map;
-import java.util.TreeMap;
 
 /**
  * Class representing the Furnace Golem
@@ -55,5 +48,19 @@ public class FurnaceGolem extends Enemy {
             actions.add(new AttackAction(this, direction));
         }
         return actions;
+    }
+
+    /**
+     *Called when Furnace Golem was defeated and player get remembrance
+     *
+     * @param actor the actor
+     * @param map   where the Furnace Golem fell unconscious
+     * @return a String representing the result of the unconscious state
+     */
+    @Override
+    public String unconscious(Actor actor, GameMap map) {
+        RemembranceOfTheFurnaceGolem remembranceOfTheFurnaceGolem = new RemembranceOfTheFurnaceGolem();
+        actor.addItemToInventory(remembranceOfTheFurnaceGolem);
+        return super.unconscious(actor, map);
     }
 }

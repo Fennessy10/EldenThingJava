@@ -13,6 +13,7 @@ import game.actors.Enemy;
 import game.behaviours.AttackBehaviour;
 import game.behaviours.FollowBehaviour;
 import game.behaviours.WanderBehaviour;
+import game.items.RemembranceOfDancingLion;
 import game.enums.Status;
 import game.grounds.Gate;
 
@@ -58,6 +59,11 @@ public class DivineBeast extends Enemy {
 
     @Override
     public String unconscious(Actor actor, GameMap map) {
+
+        //Creating and adding Remembrance
+        RemembranceOfDancingLion remembrance = new RemembranceOfDancingLion();
+        actor.addItemToInventory(remembrance);
+
         Location escapeGateLocation = map.locationOf(dancePartner);
         int x_coord = escapeGateLocation.x();
         int y_coord = escapeGateLocation.y();
