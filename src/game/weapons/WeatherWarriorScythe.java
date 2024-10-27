@@ -3,21 +3,45 @@ package game.weapons;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.weapons.IntrinsicWeapon;
+import game.effects.BurningStatusEffect;
 import game.effects.PoisonedEffect;
+import game.enums.Weather;
+import game.weather.Atmosphere;
+import game.weather.WeatherAffected;
 
 import java.util.Random;
 
-public class WeatherWarriorScythe extends IntrinsicWeapon{
-    private final static int weatherWarriorDamage = 20;
-    private final static String weatherWarriorVerb = "stings";
-    private final static int weatherWarriorHitRate = 25;
-    private final static int poisonWaterChance = 30;
+public class WeatherWarriorScythe extends IntrinsicWeapon implements WeatherAffected {
+    private final static int weatherWarriorDamage = 30;
+    private final static String weatherWarriorVerb = "slices";
+    private final static int weatherWarriorHitRate = 90;
+    private static final int poisonDamage = 5;
+    private static final int poisonDuration = 2;
+    private static final int burnDamage = 5;
+    private static final int burnDuration = 2;
+    private final Atmosphere atmosphere;
+    private static final int extraIceDamage = 10;
+    private Weather weather;
 
     private final Random random = new Random();
 
-    public WeatherWarriorScythe() {
+    public WeatherWarriorScythe(Atmosphere atmosphere) {
         super(weatherWarriorDamage, weatherWarriorVerb, weatherWarriorHitRate);
+        this.weather = atmosphere.getCurrentWeather();
+        this.atmosphere = atmosphere;
     }
+
+    /**
+     * Reacts to changes in weather.
+     *
+     * @param currentWeather the current weather condition.
+     */
+    @Override
+    public void reactToWeather(Weather currentWeather) {
+        this.weather = currentWeather;
+        System.out.println("TallAxe reacting to weather: " + currentWeather); // Debug log
+    }
+
 
     /**
      * attack action method only for WeatherWarrior
@@ -30,15 +54,23 @@ public class WeatherWarriorScythe extends IntrinsicWeapon{
      */
     @Override
     public String attack(Actor attacker, Actor target, GameMap map) {
+        // React to the latest weather before attacking
+        reactToWeather(atmosphere.getCurrentWeather());
+
+        int currentDamage = weatherWarriorDamage;
         if (!(random.nextInt(100) < this.hitRate)) {
             return attacker + " misses " + target + ".";
         }
-        if(random.nextInt(100) < poisonWaterChance){
-            target.addStatusEffect(new PoisonedEffect(10, 2)); //if poison on add effect on player
-            return (attacker + " hits target and poison applied to " + target);
+
+        switch (weather) {
+            case SUNNY -> target.addStatusEffect(new BurningStatusEffect(burnDamage, burnDuration));
+            case RAINY -> target.addStatusEffect(new PoisonedEffect(poisonDamage, poisonDuration));
+            case SNOWY -> currentDamage += extraIceDamage;
         }
-        target.hurt(damage);
+
+        target.hurt(currentDamage);
 
         return String.format("%s %s %s for %d damage", attacker, verb, target, damage);
     }
+
 }
