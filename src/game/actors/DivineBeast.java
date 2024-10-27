@@ -1,4 +1,4 @@
-package game;
+package game.actors;
 
 import edu.monash.fit2099.engine.actions.Action;
 import edu.monash.fit2099.engine.actions.ActionList;
@@ -8,11 +8,13 @@ import edu.monash.fit2099.engine.actors.Behaviour;
 import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.Location;
+import game.weapons.DivinePower;
 import game.actions.AttackAction;
-import game.actors.Enemy;
+import game.actions.DivineAttackAction;
 import game.behaviours.FollowBehaviour;
 import game.items.RemembranceOfDancingLion;
 import game.enums.Status;
+import game.maps.BossMap;
 import game.weapons.SharpTeeth;
 
 /**

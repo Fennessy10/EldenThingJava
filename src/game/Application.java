@@ -1,14 +1,11 @@
 package game;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import edu.monash.fit2099.engine.actions.MoveActorAction;
 import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.positions.FancyGroundFactory;
 import edu.monash.fit2099.engine.positions.GameMap;
-import edu.monash.fit2099.engine.positions.Location;
 import edu.monash.fit2099.engine.positions.World;
 import game.actors.FurnaceGolem;
 import game.actors.Player;
@@ -20,6 +17,7 @@ import game.grounds.*;
 import game.consumables.FlaskOfHealing;
 import game.consumables.FlaskOfRejuvenation;
 import game.consumables.ShadowTreeFragment;
+import game.maps.BossMap;
 import game.spawners.ManFlySpawner;
 import game.spawners.SpiritSpawner;
 import game.weapons.*;

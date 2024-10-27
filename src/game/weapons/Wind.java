@@ -1,4 +1,4 @@
-package game;
+package game.weapons;
 
 import edu.monash.fit2099.engine.actions.Action;
 import edu.monash.fit2099.engine.actions.DoNothingAction;
@@ -6,6 +6,10 @@ import edu.monash.fit2099.engine.actions.MoveActorAction;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.Location;
+import game.weapons.DivinePower;
+import game.weapons.Frost;
+import game.weapons.Lightning;
+
 import java.util.ArrayList;
 import java.util.Random;
 

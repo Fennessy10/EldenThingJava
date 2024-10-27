@@ -1,9 +1,11 @@
-package game;
+package game.maps;
 
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.positions.FancyGroundFactory;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.Location;
+import game.actors.DivineBeast;
+import game.weapons.Wind;
 import game.grounds.*;
 import java.util.List;
 

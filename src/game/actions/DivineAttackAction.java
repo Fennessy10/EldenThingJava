@@ -1,8 +1,10 @@
-package game;
+package game.actions;
 
 import edu.monash.fit2099.engine.actions.Action;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.positions.GameMap;
+import game.actors.DivineBeast;
+import game.weapons.DivinePower;
 
 /**
  * Represents an action where the Divine Beast performs a special attack on ts target using its current divine pwoer
