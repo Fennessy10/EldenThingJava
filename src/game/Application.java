@@ -191,7 +191,7 @@ public class Application {
         beluratSewersMap.at(19,4).setGround(new Graveyard(new ManFlySpawner()));
 
         SuspiciousTrader suspiciousTrader = new SuspiciousTrader();
-        gameMap.at(7, 4).addActor(suspiciousTrader);
+        gameMap.at(7, 5).addActor(suspiciousTrader);
 
 
         world.run();
