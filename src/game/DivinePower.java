@@ -19,8 +19,20 @@ public interface DivinePower {
     /**
      * Determines the next divine power based on the current one
      *
-     * @param currentPower The current Divine Power instance
      * @return The next Divine Power instance
      */
-    public DivinePower getNextPower (DivinePower currentPower);
+    public DivinePower getNextPower();
+    /**
+     * Provides a description of the attack based on the divine power.
+     *
+     * @return A string describing the effect of the divine power attack.
+     */
+    public String attackDescription();
+
+    /**
+     * Provides an initialisation message when the divine power is activated.
+     *
+     * @return A string describing the awakening of the divine power
+     */
+    public String initialisePower();
 }
