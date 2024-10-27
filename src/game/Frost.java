@@ -14,7 +14,7 @@ import edu.monash.fit2099.engine.positions.Location;
  * wet surface when the frost strikes.
  */
 public class Frost implements DivinePower {
-    private boolean beatenByTheFrost = false;
+    private boolean beatenByTheFrost;
 
     /**
      * Executes the frost attack on a target, potentially causing the target to lose all of its inventory
@@ -65,9 +65,18 @@ public class Frost implements DivinePower {
     @Override
     public String attackDescription() {
         if (beatenByTheFrost) {
-            return "The air turns bitter, and the land shudders beneath an ancient cold. Frost grips all in its chilling embrace.\n" +
-                    "The cold seizes the water beneath and the ground betrays your footing.";
+            return "The cold seizes the water beneath and the ground betrays your footing.";
         }
+        return null;
+    }
+
+    /**
+     * Provides an initialisation message when the Frost Power is activated
+     *
+     * @return A string describing the awakening of the Frost Power
+     */
+    @Override
+    public String initialisePower() {
         return "The air turns bitter, and the land shudders beneath an ancient cold. Frost grips all in its chilling embrace.";
     }
 }
