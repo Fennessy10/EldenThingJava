@@ -37,7 +37,7 @@ public class FurnaceGolem extends Enemy {
      * Determines what actions other actors can perform on the Furnance Golem
      *
      * Also handles implementation of follow behaviour by checking if a followable actor enters its
-     * surroundings, and if so, adds follow behaviour to actor's hashmap of behaviours.
+     * surroundings, and if so, adds follow behaviour to actor's treemap of behaviours.
      *
      * @param otherActor the Actor that might be performing attack
      * @param direction  String representing the direction of the other Actor

@@ -17,38 +17,36 @@ import game.enums.Weather;
 import game.weather.Atmosphere;
 import game.weather.WeatherAffected;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
- * it wanders around and changes the weather. The creature contains many treasures
+ * The WeatherWizard wanders around and changes the weather.
+ * Upon unconsciousness, it explodes and respawns in the same location.
  */
 public class WeatherWizard extends Actor implements WeatherAffected {
-    private final Map<Integer, Behaviour> weatherWizardBehaviours = new HashMap<>();
-    private final static int weatherWizardHP = 50;
+    private final Map<Integer, Behaviour> weatherWizardBehaviours = new TreeMap<>();
+    private static final int weatherWizardHP = 50;
     private final Atmosphere atmosphere;
 
     /**
-     * The constructor of the WeatherWizard class
-     * it wanders around and can be consumed
+     * Constructor for the WeatherWizard class.
+     *
+     * @param atmosphere the atmosphere instance controlling weather changes.
      */
     public WeatherWizard(Atmosphere atmosphere) {
         super("WeatherWizard", '^', weatherWizardHP);
         this.atmosphere = atmosphere;
-        this.weatherWizardBehaviours.put(999, new WanderBehaviour());
-        this.addCapability(Ability.POISON_RESISTANT);
-        this.addCapability(Ability.FIRE_RESISTANT);
-        this.addCapability(Status.ENEMY);
+        weatherWizardBehaviours.put(999, new WanderBehaviour());
+        addCapability(Ability.POISON_RESISTANT);
+        addCapability(Ability.FIRE_RESISTANT);
+        addCapability(Status.ENEMY);
     }
 
-
     /**
-     * Select and return an action to perform on the current turn.
+     * Selects and returns an action to perform on the current turn.
      *
      * @param actions    collection of possible Actions for this Actor
-     * @param lastAction The Action this Actor took last turn. Can do interesting things in conjunction with Action.getNextAction()
+     * @param lastAction the Action this Actor took last turn
      * @param map        the map containing the Actor
      * @param display    the I/O object to which messages may be written
      * @return the Action to be performed
@@ -57,25 +55,24 @@ public class WeatherWizard extends Actor implements WeatherAffected {
     public Action playTurn(ActionList actions, Action lastAction, GameMap map, Display display) {
         atmosphere.changeWeather();
         display.println("WeatherWizard chooses: " + atmosphere.getCurrentWeather() + " for the next turn");
-        this.reactToWeather(atmosphere.getCurrentWeather());
+        reactToWeather(atmosphere.getCurrentWeather());
+
+        // Execute behavior logic using the TreeMap.
         for (Behaviour behaviour : weatherWizardBehaviours.values()) {
             Action action = behaviour.getAction(this, map);
-            if (action != null)
-                return action;
+            if (action != null) return action;
         }
+
         return new DoNothingAction();
     }
 
     /**
-     * Determines what actions other actors can perform on the Scarab
+     * Determines the actions other actors can perform on the WeatherWizard.
      *
-     * Also handles implementation of follow behaviour by checking if a followable actor enters its
-     * surroundings, and if so, adds follow behaviour to actor's hashmap of behaviours.
-     *
-     * @param otherActor the Actor that might be performing attack
-     * @param direction  String representing the direction of the other Actor
-     * @param map        current GameMap
-     * @return An ActionList of available actions an actor can perform on the Scarab
+     * @param otherActor the Actor that might be performing an attack
+     * @param direction  the direction of the other Actor
+     * @param map        the current GameMap
+     * @return an ActionList of available actions an actor can perform on the WeatherWizard
      */
     @Override
     public ActionList allowableActions(Actor otherActor, String direction, GameMap map) {
@@ -87,42 +84,35 @@ public class WeatherWizard extends Actor implements WeatherAffected {
     }
 
     /**
-     * If the WeatherWizard somehow dies they explode and a new WeatherWizard spawns
+     * Handles logic when the WeatherWizard becomes unconscious. It explodes,
+     * dealing damage to nearby actors and spawning a new WeatherWizard.
      *
-     * @param map        current GameMap
-     * @return An ActionList of available actions an actor can perform on the Scarab
+     * @param actor the actor responsible for the WeatherWizard's unconscious state
+     * @param map   the GameMap where the WeatherWizard is located
+     * @return a message describing the result of the explosion and respawn
      */
     @Override
     public String unconscious(Actor actor, GameMap map) {
-        // Retrieve the Scarab's current location before removing it from the map
-        Location scarabLocation = map.locationOf(this);
-
-        // Proceed with removing the Scarab from the map
+        Location wizardLocation = map.locationOf(this);
         String result = super.unconscious(actor, map) + "\n" + this + " explodes upon its death!";
 
-
-
-        // Get the surrounding locations
         List<Location> surroundingLocations = new ArrayList<>();
-        for (Exit exit : scarabLocation.getExits()) {
+        for (Exit exit : wizardLocation.getExits()) {
             surroundingLocations.add(exit.getDestination());
         }
 
-        // Apply explosion damage to actors in the surroundings
         int explosionDamage = 50;
-        for (Location surroundingLocation : surroundingLocations) {
-            if (surroundingLocation.containsAnActor()) {
-                Actor nearbyActor = surroundingLocation.getActor();
+        for (Location location : surroundingLocations) {
+            if (location.containsAnActor()) {
+                Actor nearbyActor = location.getActor();
                 nearbyActor.hurt(explosionDamage);
                 result += String.format("\nThe explosion hits %s for %d damage!", nearbyActor, explosionDamage);
             }
         }
 
-        WeatherWizard weatherWizard = new WeatherWizard(atmosphere);
-        scarabLocation.addActor(weatherWizard);
+        wizardLocation.addActor(new WeatherWizard(atmosphere));
         return result;
     }
-
 
     /**
      * Reacts to changes in weather.
@@ -131,6 +121,6 @@ public class WeatherWizard extends Actor implements WeatherAffected {
      */
     @Override
     public void reactToWeather(Weather currentWeather) {
-
+        // Implement weather-based behavior here (e.g., gain/lose abilities).
     }
 }
