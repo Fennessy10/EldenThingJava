@@ -47,7 +47,7 @@ public class Memento extends WeaponArt {
             player.modifyAttribute(NewActorAttributes.STRENGTH,ActorAttributeOperations.UPDATE,lastState.getStrength());
             return String.format("%s restores their last saved state using Memento.", player);
         } else {
-            return "No previous state to restore.";
+            return String.format("No previous state to restore.");
         }
     }
 }
