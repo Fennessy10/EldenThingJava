@@ -72,10 +72,7 @@ public abstract class WeaponItem extends Item implements Weapon {
             return result;
         }
 
-        if (attacker.getAttribute(BaseActorAttributes.MANA) >= weaponArt.manaCost && weaponArt != null) {
-            attacker.modifyAttribute(BaseActorAttributes.MANA, ActorAttributeOperations.DECREASE, weaponArt.manaCost);
-            result += weaponArt.execute(attacker,map);
-        }
+        result += weaponArt.activate(attacker,map);
 
         target.hurt(Math.round(damage * damageMultiplier));
         result += String.format("\n%s %s %s for %d damage", attacker, verb, target, damage);
