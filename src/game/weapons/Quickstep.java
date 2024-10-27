@@ -29,7 +29,7 @@ public class Quickstep extends WeaponArt {
      * Constructor to initialize Quickstep with its name and mana cost.
      */
     public Quickstep() {
-        super("Quickstep",DEFAULT_MANA_COST);
+        super(DEFAULT_MANA_COST);
     }
 
 
@@ -43,7 +43,7 @@ public class Quickstep extends WeaponArt {
      */
 
     @Override
-    public String execute(Actor player, GameMap map) {
+    public String activate(Actor player, GameMap map) {
         Random random = new Random();
         Location actorLocation = map.locationOf(player);
 
@@ -63,6 +63,6 @@ public class Quickstep extends WeaponArt {
             Action moveAction = new MoveActorAction(destination, randomExit.getName());
             moveAction.execute(player, map);
         }
-        return String.format("%s uses %s", player,name);
+        return String.format("%s uses %s", player);
     }
 }
