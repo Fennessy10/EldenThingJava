@@ -66,12 +66,12 @@ public abstract class WeaponItem extends Item implements Weapon {
         Random rand = new Random();
         String result = "";
 
+        result += weaponArt.activate(attacker,map);
+
         if (!(rand.nextInt(100) < this.hitRate)) {
             result += "\n" + attacker + " misses " + target + ".";
             return result;
         }
-
-        result += weaponArt.activate(attacker,map);
 
         target.hurt(Math.round(damage * damageMultiplier));
         result += String.format("\n%s %s %s for %d damage", attacker, verb, target, damage);
