@@ -121,6 +121,5 @@ public class WeatherWizard extends Actor implements WeatherAffected {
      */
     @Override
     public void reactToWeather(Weather currentWeather) {
-        // Implement weather-based behavior here (e.g., gain/lose abilities).
     }
 }
