@@ -22,7 +22,7 @@ public class BossMap extends GameMap {
     private DivineBeast divineBeast;
 
     /**
-     * Constructor for StageFrontMap
+     * Constructor for BossMap
      *
      * @param name The name of the map
      * @param groundFactory The factory to create ground types
@@ -82,6 +82,7 @@ public class BossMap extends GameMap {
                         "Cleanse away the strumpet's vile progeny.\n");
                 Actor fighter = this.getActorAt(spawnPoint); // If there is, getting the actor
                 divineBeast = new DivineBeast(this); // Waking up the divine beast. i.e. instantiating a
+                divineBeast.setInitialDivinePower(new Wind()); // Setting the boss for this map's initial power to Wind
                 bossSpawnPoint.addActor(divineBeast);
                 divineBeast.newDancePartner(fighter); // Adding the actor on the spawn point as beast's dance partner
             }
