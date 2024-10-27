@@ -20,6 +20,8 @@ import game.consumables.ShadowTreeFragment;
 import game.maps.BossMap;
 import game.spawners.ManFlySpawner;
 import game.spawners.SpiritSpawner;
+import game.weaponarts.LifeSteal;
+import game.weaponarts.Quickstep;
 import game.weapons.*;
 import game.weather.Atmosphere;
 

@@ -2,7 +2,7 @@ package game.weapons;
 
 
 
-import edu.monash.fit2099.engine.weapons.Weapon;
+import game.weaponarts.WeaponArt;
 
 /**
  * Class representing a short sword weapon item.
