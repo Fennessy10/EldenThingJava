@@ -105,8 +105,8 @@ public class Application {
         );
         // Creating the "Stage Front" boss map
         BossMap stageFrontMap = new BossMap("StageFrontMap", groundFactory, stageFront, beluratTowerMap.at(25,1));
-        stageFrontMap.addBeastSpawnPoint();
-        stageFrontMap.addBeastSpawnPoint();
+        stageFrontMap.addBeastSpawnPoint(stageFrontMap.at(8, 1));
+        stageFrontMap.addFighterSpawnPoint(stageFrontMap.at(8, 6));
         // Adding map to world
         world.addGameMap(stageFrontMap);
 
