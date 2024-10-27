@@ -2,8 +2,6 @@ package game.weapons;
 
 import edu.monash.fit2099.engine.actions.ActionList;
 import edu.monash.fit2099.engine.actors.Actor;
-import edu.monash.fit2099.engine.actors.attributes.ActorAttributeOperations;
-import edu.monash.fit2099.engine.actors.attributes.BaseActorAttributes;
 import edu.monash.fit2099.engine.items.Item;
 import edu.monash.fit2099.engine.items.PickUpAction;
 import edu.monash.fit2099.engine.positions.GameMap;
@@ -12,6 +10,7 @@ import edu.monash.fit2099.engine.weapons.Weapon;
 import game.enums.NewActorAttributes;
 import game.actions.AttackAction;
 import game.enums.Status;
+import game.weaponarts.WeaponArt;
 
 
 import java.util.Random;

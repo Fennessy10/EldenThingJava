@@ -1,9 +1,7 @@
 package game.weapons;
 
-import edu.monash.fit2099.engine.actions.ActionList;
-import edu.monash.fit2099.engine.actors.Actor;
-import edu.monash.fit2099.engine.positions.Location;
-import edu.monash.fit2099.engine.weapons.Weapon;
+import game.weaponarts.WeaponArt;
+
 /**
  * Class representing a great knife weapon item.
  * Short sword deals 75 damage and has a 60% chance to hit

@@ -1,4 +1,4 @@
-package game.weapons;
+package game.weaponarts;
 
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.actors.attributes.ActorAttributeOperations;
@@ -22,17 +22,17 @@ public class Memento extends WeaponArt {
     @Override
     public String activate(Actor player, GameMap map) {
         if (player.getAttribute(BaseActorAttributes.HEALTH) <= HEALTH_COST) {
+            saveState(player);
             return String.format("%s's health is too low to use Memento.", player);
         }
 
         player.hurt(HEALTH_COST);
 
         if (Math.random() < 0.5) {
+            return restoreState(player);
+        } else
             saveState(player);
             return String.format("%s saves their current state using Memento.", player);
-        } else {
-            return restoreState(player);
-        }
     }
 
     private void saveState(Actor player) {

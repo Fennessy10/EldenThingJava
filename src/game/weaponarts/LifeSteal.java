@@ -1,9 +1,9 @@
-package game.weapons;
+package game.weaponarts;
 
 import edu.monash.fit2099.engine.actors.Actor;
-import edu.monash.fit2099.engine.actors.attributes.ActorAttributeOperations;
 import edu.monash.fit2099.engine.actors.attributes.BaseActorAttributes;
 import edu.monash.fit2099.engine.positions.GameMap;
+
 /**
  * Class representing the life steal weapon art
  * Extends the WeaponArt class and allows the player to move to regenerate health after attacking another actor
@@ -14,7 +14,7 @@ import edu.monash.fit2099.engine.positions.GameMap;
  *  * Created by:
  *  * @author Sebastian Aisea
  */
-public class LifeSteal extends WeaponArt{
+public class LifeSteal extends WeaponArt {
 
     private final static int MANA_COST = 10;
     private final static int HEALING_POINTS = 20;

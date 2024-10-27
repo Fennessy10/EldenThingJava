@@ -1,4 +1,4 @@
-package game.weapons;
+package game.weaponarts;
 
 import edu.monash.fit2099.engine.actions.Action;
 import edu.monash.fit2099.engine.actions.MoveActorAction;
@@ -6,6 +6,7 @@ import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.positions.Exit;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.Location;
+
 import java.util.ArrayList;
 import java.util.List;
 
