@@ -5,6 +5,7 @@ import edu.monash.fit2099.engine.positions.GameMap;
 import game.effects.BurningStatusEffect;
 import game.effects.PoisonedEffect;
 import game.enums.Weather;
+import game.weaponarts.WeaponArt;
 import game.weather.Atmosphere;
 import game.weather.WeatherAffected;
 

@@ -21,6 +21,7 @@ import game.maps.BossMap;
 import game.spawners.ManFlySpawner;
 import game.spawners.SpiritSpawner;
 import game.weaponarts.LifeSteal;
+import game.weaponarts.Memento;
 import game.weaponarts.Quickstep;
 import game.weapons.*;
 import game.weather.Atmosphere;
@@ -161,6 +162,9 @@ public class Application {
 
         GreatKnife greatKnife2 = new GreatKnife(new LifeSteal());
         gameMap.at(15, 6).addItem(greatKnife2);
+
+        GreatKnife greatKnife3 = new GreatKnife(new Memento());
+        gameMap.at(6, 8).addItem(greatKnife3);
 
         TallAxe tallAxe = new TallAxe(new LifeSteal(), atmosphere);
         gameMap.at(21, 8).addItem(tallAxe);

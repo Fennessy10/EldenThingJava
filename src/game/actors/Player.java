@@ -53,6 +53,7 @@ public class Player extends Actor {
             return lastAction.getNextAction();
 
         // show strength + mana in menu console
+        display.println(name + " (" + getAttribute(BaseActorAttributes.HEALTH) + "/" + getAttributeMaximum(BaseActorAttributes.HEALTH) + ")");
         display.println("Strength: " + getAttributeMaximum(NewActorAttributes.STRENGTH));
         display.println("Mana: " + getAttribute(BaseActorAttributes.MANA) + "/" + getAttributeMaximum(BaseActorAttributes.MANA));
 
