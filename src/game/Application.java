@@ -12,7 +12,7 @@ import edu.monash.fit2099.engine.positions.Location;
 import edu.monash.fit2099.engine.positions.World;
 import game.actors.FurnaceGolem;
 import game.actors.Player;
-import game.actors.SuspiciousTrader;
+import game.actors.WeatherWarrior;
 import game.actors.WeatherWizard;
 import game.grounds.Gate;
 import game.displays.FancyMessage;
@@ -131,7 +131,7 @@ public class Application {
             }
         }
 
-        Player player = new Player("Tarnished", '@', 1500, 10, 100);
+        Player player = new Player("Tarnished", '@', 150, 10, 100);
         world.addPlayer(player, gameMap.at(7, 4));
 
         // Place the ShortSword at coordinates (x=7, y=8)
@@ -145,7 +145,7 @@ public class Application {
         GreatKnife greatKnife2 = new GreatKnife(new LifeSteal());
         gameMap.at(15, 6).addItem(greatKnife2);
 
-        TallAxe tallAxe = new TallAxe(new LifeSteal(), atmosphere);
+        TallAxe tallAxe = new TallAxe(atmosphere);
         gameMap.at(21, 8).addItem(tallAxe);
 
         FlaskOfHealing flaskOfHealing = new FlaskOfHealing();
@@ -175,8 +175,8 @@ public class Application {
 
         beluratSewersMap.at(19,4).setGround(new Graveyard(new ManFlySpawner()));
 
-        SuspiciousTrader suspiciousTrader = new SuspiciousTrader();
-        gameMap.at(7, 4).addActor(suspiciousTrader);
+        WeatherWarrior weatherWarrior = new WeatherWarrior(new WeatherWarriorScythe(atmosphere));
+        gameMap.at(16,3).addActor(weatherWarrior);
 
 
         world.run();
