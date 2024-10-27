@@ -2,9 +2,11 @@ package game.weapons;
 
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.positions.GameMap;
+import edu.monash.fit2099.engine.weapons.Weapon;
 import game.effects.BurningStatusEffect;
 import game.effects.PoisonedEffect;
 import game.enums.Weather;
+import game.weaponarts.WeaponArt;
 import game.weather.Atmosphere;
 import game.weather.WeatherAffected;
 
@@ -26,10 +28,11 @@ public class TallAxe extends WeaponItem implements WeatherAffected {
     private final Atmosphere atmosphere;
     private Weather weather;
 
-    public TallAxe(Atmosphere atmosphere) {
+    public TallAxe(Atmosphere atmosphere, WeaponArt weaponArt) {
         super(weaponName, displayChar, baseDamage, verb, hitRate, strengthRequirement);
         this.atmosphere = atmosphere;
         this.weather = atmosphere.getCurrentWeather();  // Initialize with current weather
+        this.setWeaponArt(weaponArt);
     }
 
     @Override

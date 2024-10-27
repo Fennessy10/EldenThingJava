@@ -144,7 +144,7 @@ public class Application {
         GreatKnife greatKnife2 = new GreatKnife(new LifeSteal());
         gameMap.at(15, 6).addItem(greatKnife2);
 
-        TallAxe tallAxe = new TallAxe(atmosphere);
+        TallAxe tallAxe = new TallAxe(atmosphere, new LifeSteal());
         gameMap.at(21, 8).addItem(tallAxe);
 
         FlaskOfHealing flaskOfHealing = new FlaskOfHealing();
