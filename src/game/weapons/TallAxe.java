@@ -26,10 +26,11 @@ public class TallAxe extends WeaponItem implements WeatherAffected {
     private final Atmosphere atmosphere;
     private Weather weather;
 
-    public TallAxe(Atmosphere atmosphere) {
+    public TallAxe(WeaponArt weaponArt, Atmosphere atmosphere) {
         super(weaponName, displayChar, baseDamage, verb, hitRate, strengthRequirement);
         this.atmosphere = atmosphere;
         this.weather = atmosphere.getCurrentWeather();  // Initialize with current weather
+        this.setWeaponArt(weaponArt);
     }
 
     @Override
