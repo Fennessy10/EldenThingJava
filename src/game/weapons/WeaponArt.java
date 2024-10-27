@@ -11,24 +11,21 @@ import edu.monash.fit2099.engine.positions.GameMap;
  **/
 
 public abstract class WeaponArt {
-    protected String name;
-    protected int manaCost;
+    private int reqCost;
 
     /**
      * Constructor to initialize a WeaponArt with its name and mana cost.
      *
-     * @param name the name of the weapon art
      * @param manaCost the mana cost of using the weapon art
      */
 
-    public WeaponArt(String name, int manaCost){
-        this.name = name;
-        this.manaCost = manaCost;
+    public WeaponArt(int manaCost){
+        this.reqCost = reqCost;
     }
 
-    public String execute(Actor player, GameMap map){
+    public String activate(Actor player, GameMap map){
 
-        return String.format("%s uses %s", player,name);
+        return String.format("%s uses %s", player);
 
     }
 }
