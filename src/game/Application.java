@@ -149,7 +149,7 @@ public class Application {
             }
         }
 
-        Player player = new Player("Tarnished", '@', 1500, 10, 100);
+        Player player = new Player("Tarnished", '@', 1500, 5, 100);
         world.addPlayer(player, gameMap.at(7, 4));
 
         // Place the ShortSword at coordinates (x=7, y=8)

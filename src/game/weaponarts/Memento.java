@@ -22,7 +22,6 @@ public class Memento extends WeaponArt {
     @Override
     public String activate(Actor player, GameMap map) {
         if (player.getAttribute(BaseActorAttributes.HEALTH) <= HEALTH_COST) {
-            saveState(player);
             return String.format("%s's health is too low to use Memento.", player);
         }
 
