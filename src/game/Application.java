@@ -12,7 +12,7 @@ import edu.monash.fit2099.engine.positions.Location;
 import edu.monash.fit2099.engine.positions.World;
 import game.actors.FurnaceGolem;
 import game.actors.Player;
-import game.actors.WeatherWarrior;
+import game.actors.SuspiciousTrader;
 import game.actors.WeatherWizard;
 import game.grounds.Gate;
 import game.displays.FancyMessage;
@@ -88,11 +88,28 @@ public class Application {
                 "++~~+++#####~~~~~++###++~~~###",
                 "+~~++++######~~~~++###++~~~###"
         );
-
         // Creating the "Belurat Sewers" game map
         GameMap beluratSewersMap = new GameMap("Belurat Sewers", groundFactory, beluratSewers);
         // Adding map to world
         world.addGameMap(beluratSewersMap);
+
+        // Defining the layout of the "Belurat Sewers" map
+        List<String> stageFront = Arrays.asList(
+                "#################",
+                "#~~~..........~~#",
+                "#~~~...........~#",
+                "#~~.............#",
+                "#............~~~#",
+                "#..........~~~~~#",
+                "#######...#######"
+        );
+        // Creating the "Stage Front" boss map
+        BossMap stageFrontMap = new BossMap("StageFrontMap", groundFactory, stageFront, beluratTowerMap.at(25,1));
+        stageFrontMap.addBeastSpawnPoint();
+        stageFrontMap.addBeastSpawnPoint();
+        // Adding map to world
+        world.addGameMap(stageFrontMap);
+
 
 
         // Creating a gate for Gravestite Plains to allow actors travel between maps.
@@ -131,7 +148,7 @@ public class Application {
             }
         }
 
-        Player player = new Player("Tarnished", '@', 150, 10, 100);
+        Player player = new Player("Tarnished", '@', 1500, 10, 100);
         world.addPlayer(player, gameMap.at(7, 4));
 
         // Place the ShortSword at coordinates (x=7, y=8)
@@ -145,7 +162,7 @@ public class Application {
         GreatKnife greatKnife2 = new GreatKnife(new LifeSteal());
         gameMap.at(15, 6).addItem(greatKnife2);
 
-        TallAxe tallAxe = new TallAxe(atmosphere);
+        TallAxe tallAxe = new TallAxe(new LifeSteal(), atmosphere);
         gameMap.at(21, 8).addItem(tallAxe);
 
         FlaskOfHealing flaskOfHealing = new FlaskOfHealing();
@@ -175,8 +192,8 @@ public class Application {
 
         beluratSewersMap.at(19,4).setGround(new Graveyard(new ManFlySpawner()));
 
-        WeatherWarrior weatherWarrior = new WeatherWarrior(new WeatherWarriorScythe(atmosphere));
-        gameMap.at(16,3).addActor(weatherWarrior);
+        SuspiciousTrader suspiciousTrader = new SuspiciousTrader();
+        gameMap.at(7, 4).addActor(suspiciousTrader);
 
 
         world.run();
