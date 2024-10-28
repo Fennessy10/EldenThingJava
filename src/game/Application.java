@@ -22,7 +22,7 @@ import game.spawners.ManFlySpawner;
 import game.spawners.SpiritSpawner;
 import game.weaponarts.LifeSteal;
 import game.weaponarts.Memento;
-import game.weaponarts.Quickstep;
+import game.weaponarts.QuickStep;
 import game.weapons.*;
 import game.weather.Atmosphere;
 
@@ -153,11 +153,11 @@ public class Application {
         world.addPlayer(player, gameMap.at(7, 4));
 
         // Place the ShortSword at coordinates (x=7, y=8)
-        ShortSword shortSword = new ShortSword(new Quickstep());
+        ShortSword shortSword = new ShortSword(new QuickStep());
         gameMap.at(7, 8).addItem(shortSword);
 
         // Place the ShortSword at coordinates (x=5, y=8)
-        GreatKnife greatKnife = new GreatKnife(new Quickstep());
+        GreatKnife greatKnife = new GreatKnife(new QuickStep());
         gameMap.at(5, 8).addItem(greatKnife);
 
         GreatKnife greatKnife2 = new GreatKnife(new LifeSteal());

@@ -20,7 +20,7 @@ import java.util.Random;
  *  * Created by:
  *  * @author Sebastian Aisea
  */
-public class Quickstep implements WeaponArt {
+public class QuickStep implements WeaponArt {
 
     /**
      * Executes the Quickstep ability by moving the player to a random valid adjacent location on the map.
