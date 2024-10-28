@@ -38,7 +38,7 @@ public class Wind implements DivinePower {
 
         if (Math.abs(targetLocation.x() - bossLocation.x()) > 1 || Math.abs(targetLocation.y() - bossLocation.y()) > 1) {
             targetMoved = false;
-            return new DoNothingAction();
+            return null;
         }
         // Find all adjacent locations that are free (not occupied by another actor)
         ArrayList<Location> adjacentLocations = new ArrayList<>();
@@ -57,7 +57,7 @@ public class Wind implements DivinePower {
         // If there are no valid adjacent locations, return DoNothingAction
         if (adjacentLocations.isEmpty()) {
             targetMoved = false;
-            return new DoNothingAction();  // Tarnished cannot be moved
+            return null;  // Tarnished cannot be moved
         }
 
         // Randomly select an adjacent location
