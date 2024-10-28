@@ -11,7 +11,7 @@ public class DivineBeastHead extends WeaponItem{
      * Constructor of DivineBeastHead
      */
     public DivineBeastHead(){
-        super("Divine Beast Head",'$',150,"bite",30,0);
+        super("Divine Beast Head",'$',150,"bite",30);
         this.currentPower = new Wind();// set wind as every first power
     }
 

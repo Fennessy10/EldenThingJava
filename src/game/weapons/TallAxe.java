@@ -1,9 +1,11 @@
 package game.weapons;
 
 import edu.monash.fit2099.engine.actors.Actor;
+import edu.monash.fit2099.engine.items.PickUpAction;
 import edu.monash.fit2099.engine.positions.GameMap;
 import game.effects.BurningStatusEffect;
 import game.effects.PoisonedEffect;
+import game.enums.NewActorAttributes;
 import game.enums.Weather;
 import game.weaponarts.WeaponArt;
 import game.weather.Atmosphere;
@@ -18,7 +20,7 @@ import java.util.Random;
 public class TallAxe extends WeaponItem implements WeatherAffected {
     private static final int baseDamage = 70;
     private static final int hitRate = 75;
-    private static final int strengthRequirement = 15;
+    private static final int STRENGTH_REQUIREMENT = 15;
     private static final String verb = "attack";
     private static final char displayChar = '‡';
     private static final String weaponName = "TallAxe";
@@ -38,7 +40,7 @@ public class TallAxe extends WeaponItem implements WeatherAffected {
      * @param atmosphere the atmosphere that provides weather updates.
      */
     public TallAxe(WeaponArt weaponArt, Atmosphere atmosphere) {
-        super(weaponName, displayChar, baseDamage, verb, hitRate, strengthRequirement);
+        super(weaponName, displayChar, baseDamage, verb, hitRate);
         this.atmosphere = atmosphere;
         this.weather = atmosphere.getCurrentWeather(); // Initialise with current weather
         this.setWeaponArt(weaponArt);
@@ -89,4 +91,21 @@ public class TallAxe extends WeaponItem implements WeatherAffected {
 
         return result;
     }
+
+    /**
+     * Returns a pick-up actions if the actor has sufficient strength to wield this weapon
+     *
+     * @param actor The actor attempting to pick up the weapon
+     * @return A PickUpAction if the actor has enough strength, otherwise null
+     */
+    @Override
+    public PickUpAction getPickUpAction(Actor actor) {
+        if (portable){
+            if (STRENGTH_REQUIREMENT <= actor.getAttribute(NewActorAttributes.STRENGTH)) {
+                return new PickUpAction(this);
+            }
+        }
+        return null;
+    }
+
 }
