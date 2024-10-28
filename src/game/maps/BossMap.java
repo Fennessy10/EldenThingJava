@@ -82,11 +82,10 @@ public class BossMap extends GameMap {
                         "Dance and cavort, cleanse all that thou wilt.\n" +
                         "Cruelty, woe, and those who plague the tower.\n" +
                         "Cleanse away the strumpet's vile progeny.\n");
-                Actor fighter = this.getActorAt(spawnPoint); // If there is, getting the actor
+
                 divineBeast = new DivineBeast(this); // Waking up the divine beast. i.e. instantiating a
                 divineBeast.setInitialDivinePower(new Wind()); // Setting the boss for this map's initial power to Wind
                 bossSpawnPoint.addActor(divineBeast);
-                divineBeast.newDancePartner(fighter); // Adding the actor on the spawn point as beast's dance partner
             }
 
         }
