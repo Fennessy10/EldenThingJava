@@ -38,14 +38,6 @@ public class DivineBeast extends Enemy {
         this.setIntrinsicWeapon(new SharpTeeth());
     }
 
-    /**
-     * Assigns a new dance partner to the Divine Beast, which will be its target during attacks.
-     *
-     * @param dancePartner The actor that the Divine Beast will interact with in combat.
-     */
-    public void newDancePartner(Actor dancePartner) {
-        this.dancePartner = dancePartner;
-    }
 
     /**
      * Sets the initial divine power for the Divine Beast to start with during its fight
@@ -91,8 +83,10 @@ public class DivineBeast extends Enemy {
         }
 
         if (dancePartner != null) {
-            return new DivineAttackAction(this, currentPower, dancePartner);
+             DivineAttackAction divineAttack = new DivineAttackAction(this, currentPower, dancePartner);
+             divineAttack.execute(dancePartner, map);
         }
+
         for (Behaviour behaviour : super.behaviours.values()) {
             Action action = behaviour.getAction(this, map);
             if (action != null)
