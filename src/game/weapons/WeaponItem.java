@@ -2,8 +2,6 @@ package game.weapons;
 
 import edu.monash.fit2099.engine.actions.ActionList;
 import edu.monash.fit2099.engine.actors.Actor;
-import edu.monash.fit2099.engine.actors.attributes.ActorAttributeOperations;
-import edu.monash.fit2099.engine.actors.attributes.BaseActorAttributes;
 import edu.monash.fit2099.engine.items.Item;
 import edu.monash.fit2099.engine.items.PickUpAction;
 import edu.monash.fit2099.engine.positions.GameMap;
@@ -12,6 +10,7 @@ import edu.monash.fit2099.engine.weapons.Weapon;
 import game.enums.NewActorAttributes;
 import game.actions.AttackAction;
 import game.enums.Status;
+import game.weaponarts.WeaponArt;
 
 
 import java.util.Random;
@@ -28,7 +27,6 @@ public abstract class WeaponItem extends Item implements Weapon {
     private int hitRate;
     private final String verb;
     private float damageMultiplier;
-    private int strengthReq;
     private WeaponArt weaponArt;
 
     /**
@@ -39,15 +37,13 @@ public abstract class WeaponItem extends Item implements Weapon {
      * @param damage      amount of damage this weapon does
      * @param verb        verb to use for this weapon, e.g. "hits", "zaps"
      * @param hitRate     the probability/chance to hit the target.
-     * @param strengthReq the minimum strength required to use this weapon
      */
-    public WeaponItem(String name, char displayChar, int damage, String verb, int hitRate, int strengthReq) {
+    public WeaponItem(String name, char displayChar, int damage, String verb, int hitRate) {
         super(name, displayChar, true);
         this.damage = damage;
         this.verb = verb;
         this.hitRate = hitRate;
         this.damageMultiplier = DEFAULT_DAMAGE_MULTIPLIER;
-        this.strengthReq = strengthReq;
         this.weaponArt = null;
     }
 
@@ -67,14 +63,11 @@ public abstract class WeaponItem extends Item implements Weapon {
         Random rand = new Random();
         String result = "";
 
+        result += weaponArt.activate(attacker,map);
+
         if (!(rand.nextInt(100) < this.hitRate)) {
             result += "\n" + attacker + " misses " + target + ".";
             return result;
-        }
-
-        if (attacker.getAttribute(BaseActorAttributes.MANA) >= weaponArt.manaCost && weaponArt != null) {
-            attacker.modifyAttribute(BaseActorAttributes.MANA, ActorAttributeOperations.DECREASE, weaponArt.manaCost);
-            result += weaponArt.execute(attacker,map);
         }
 
         target.hurt(Math.round(damage * damageMultiplier));
@@ -83,21 +76,6 @@ public abstract class WeaponItem extends Item implements Weapon {
         return result;
     }
 
-    /**
-     * Returns a pick-up actions if the actor has sufficient strength to wield a weapon
-     *
-     * @param actor The actor attempting to pick up the weapon
-     * @return A PickUpAction if the actor has enough strength, otherwise null
-     */
-    @Override
-    public PickUpAction getPickUpAction(Actor actor) {
-        if (portable){
-            if (strengthReq <= actor.getAttributeMaximum(NewActorAttributes.STRENGTH)) {
-                return new PickUpAction(this);
-            }
-        }
-        return null;
-    }
 
     /**
      * List of allowable actions an actor can perform with a WeaponItem

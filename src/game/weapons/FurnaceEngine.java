@@ -11,7 +11,7 @@ public class FurnaceEngine extends WeaponItem{
      * Initializes the engine
      */
     public FurnaceEngine() {
-        super("Furnace Engine", 'E', 100, "stomps on", 5, 0);
+        super("Furnace Engine", 'E', 100, "stomps on", 5);
         this.stompingFoot = new StompingFoot();
     }
 

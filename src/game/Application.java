@@ -20,6 +20,9 @@ import game.consumables.ShadowTreeFragment;
 import game.maps.BossMap;
 import game.spawners.ManFlySpawner;
 import game.spawners.SpiritSpawner;
+import game.weaponarts.LifeSteal;
+import game.weaponarts.Memento;
+import game.weaponarts.QuickStep;
 import game.weapons.*;
 import game.weather.Atmosphere;
 
@@ -146,19 +149,22 @@ public class Application {
             }
         }
 
-        Player player = new Player("Tarnished", '@', 1500, 10, 100);
+        Player player = new Player("Tarnished", '@', 150, 5, 100);
         world.addPlayer(player, gameMap.at(7, 4));
 
         // Place the ShortSword at coordinates (x=7, y=8)
-        ShortSword shortSword = new ShortSword(new Quickstep());
+        ShortSword shortSword = new ShortSword(new QuickStep());
         gameMap.at(7, 8).addItem(shortSword);
 
         // Place the ShortSword at coordinates (x=5, y=8)
-        GreatKnife greatKnife = new GreatKnife(new Quickstep());
+        GreatKnife greatKnife = new GreatKnife(new QuickStep());
         gameMap.at(5, 8).addItem(greatKnife);
 
         GreatKnife greatKnife2 = new GreatKnife(new LifeSteal());
         gameMap.at(15, 6).addItem(greatKnife2);
+
+        GreatKnife greatKnife3 = new GreatKnife(new Memento());
+        gameMap.at(6, 8).addItem(greatKnife3);
 
         TallAxe tallAxe = new TallAxe(new LifeSteal(), atmosphere);
         gameMap.at(21, 8).addItem(tallAxe);
@@ -191,7 +197,7 @@ public class Application {
         beluratSewersMap.at(19,4).setGround(new Graveyard(new ManFlySpawner()));
 
         SuspiciousTrader suspiciousTrader = new SuspiciousTrader();
-        gameMap.at(7, 4).addActor(suspiciousTrader);
+        gameMap.at(7, 3).addActor(suspiciousTrader);
 
 
         world.run();

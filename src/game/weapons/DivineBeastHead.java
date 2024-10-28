@@ -11,7 +11,7 @@ public class DivineBeastHead extends WeaponItem{
      * Constructor of DivineBeastHead
      */
     public DivineBeastHead(){
-        super("Divine Beast Head",'$',150,"bite",30,0);
+        super("Divine Beast Head",'$',150,"bite",30);
         this.currentPower = new Wind();// set wind as every first power
     }
 
@@ -44,7 +44,11 @@ public class DivineBeastHead extends WeaponItem{
             result = String.format("%s uses %s on %s, but nothing happens.", attacker, currentPower.getClass().getSimpleName(), target);
         }
 
-        currentPower = currentPower.getNextPower(currentPower);//switch to next divine power
+        DivinePower nextPower = currentPower.getNextPower(); //switch to next power
+        if (nextPower != currentPower) {
+            currentPower = nextPower;
+        }
+
         return result;
     }
 }

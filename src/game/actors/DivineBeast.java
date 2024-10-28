@@ -97,7 +97,7 @@ public class DivineBeast extends Enemy {
     }
 
     /**
-     * Handles the actions upon the Divine Beast's degeat, including awarding an item and creating
+     * Handles the actions upon the Divine Beast's defeat, including awarding an item and creating
      * a return gate on the map, at the location where the DivineBeast died.
      *
      * @param actor the perpetrator

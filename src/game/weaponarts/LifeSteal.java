@@ -1,7 +1,10 @@
-package game.weapons;
+package game.weaponarts;
 
 import edu.monash.fit2099.engine.actors.Actor;
+import edu.monash.fit2099.engine.actors.attributes.ActorAttributeOperations;
+import edu.monash.fit2099.engine.actors.attributes.BaseActorAttributes;
 import edu.monash.fit2099.engine.positions.GameMap;
+
 /**
  * Class representing the life steal weapon art
  * Extends the WeaponArt class and allows the player to move to regenerate health after attacking another actor
@@ -12,18 +15,10 @@ import edu.monash.fit2099.engine.positions.GameMap;
  *  * Created by:
  *  * @author Sebastian Aisea
  */
-public class LifeSteal extends WeaponArt{
+public class LifeSteal implements WeaponArt{
 
     private final static int MANA_COST = 10;
     private final static int HEALING_POINTS = 20;
-
-    /**
-     * Constructor to create a new Life Steal weapon art.
-     */
-    public LifeSteal() {
-        super("Life Steal", MANA_COST);
-    }
-
 
     /**
      * Executes the Life Steal effect, healing the player if they have enough mana.
@@ -34,9 +29,12 @@ public class LifeSteal extends WeaponArt{
      * @return A string indicating the result of using Life Steal.
      */
     @Override
-    public String execute(Actor player, GameMap map){
-        player.heal(HEALING_POINTS);
-        return String.format("%s uses %s", player,name);
-
+    public String activate(Actor player, GameMap map){
+        if (player.getAttribute(BaseActorAttributes.MANA) >= MANA_COST){
+            player.heal(HEALING_POINTS);
+            player.modifyAttribute(BaseActorAttributes.MANA, ActorAttributeOperations.DECREASE, MANA_COST);
+            return String.format("%s uses Life Steal", player);
+        }
+        return null;
     }
 }

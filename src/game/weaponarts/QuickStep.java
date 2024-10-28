@@ -1,4 +1,4 @@
-package game.weapons;
+package game.weaponarts;
 
 import edu.monash.fit2099.engine.actions.Action;
 import edu.monash.fit2099.engine.actions.MoveActorAction;
@@ -6,6 +6,7 @@ import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.positions.Exit;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.Location;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,24 +15,12 @@ import java.util.Random;
  * Class representing the quickstep weapon art
  * Extends the WeaponArt class and allows the player to move to a random location attacking another actor
  * when using a weapon with the quickstep weapon art.
- * Mana cost to use the quickstep    p weapon art is 0.
+ * There is no cost to use the quickstep weapon art.
  *
  *  * Created by:
  *  * @author Sebastian Aisea
  */
-public class Quickstep extends WeaponArt {
-
-    private final static int DEFAULT_MANA_COST = 0;
-
-
-
-    /**
-     * Constructor to initialize Quickstep with its name and mana cost.
-     */
-    public Quickstep() {
-        super("Quickstep",DEFAULT_MANA_COST);
-    }
-
+public class QuickStep implements WeaponArt {
 
     /**
      * Executes the Quickstep ability by moving the player to a random valid adjacent location on the map.
@@ -43,7 +32,7 @@ public class Quickstep extends WeaponArt {
      */
 
     @Override
-    public String execute(Actor player, GameMap map) {
+    public String activate(Actor player, GameMap map) {
         Random random = new Random();
         Location actorLocation = map.locationOf(player);
 
@@ -63,6 +52,6 @@ public class Quickstep extends WeaponArt {
             Action moveAction = new MoveActorAction(destination, randomExit.getName());
             moveAction.execute(player, map);
         }
-        return String.format("%s uses %s", player,name);
+        return String.format("%s uses Quick Step", player);
     }
 }
