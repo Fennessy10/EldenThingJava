@@ -15,24 +15,12 @@ import java.util.Random;
  * Class representing the quickstep weapon art
  * Extends the WeaponArt class and allows the player to move to a random location attacking another actor
  * when using a weapon with the quickstep weapon art.
- * Mana cost to use the quickstep weapon art is 0.
+ * There is no cost to use the quickstep weapon art.
  *
  *  * Created by:
  *  * @author Sebastian Aisea
  */
-public class Quickstep extends WeaponArt {
-
-    private final static int DEFAULT_MANA_COST = 0;
-
-
-
-    /**
-     * Constructor to initialize Quickstep with its name and mana cost.
-     */
-    public Quickstep() {
-        super(DEFAULT_MANA_COST);
-    }
-
+public class Quickstep implements WeaponArt {
 
     /**
      * Executes the Quickstep ability by moving the player to a random valid adjacent location on the map.
@@ -64,6 +52,6 @@ public class Quickstep extends WeaponArt {
             Action moveAction = new MoveActorAction(destination, randomExit.getName());
             moveAction.execute(player, map);
         }
-        return String.format("%s uses %s", player);
+        return String.format("%s uses Quick Step", player);
     }
 }

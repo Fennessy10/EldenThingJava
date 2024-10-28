@@ -3,29 +3,16 @@ package game.weaponarts;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.positions.GameMap;
 /**
- * An abstract class representing a weapon art
+ * An interface representing a weapon art
  *
  * Created by:
  * @author Sebastian Aisea
  *
  **/
 
-public abstract class WeaponArt {
-    private int reqCost;
+public interface WeaponArt {
 
-    /**
-     * Constructor to initialize a WeaponArt with its name and mana cost.
-     *
-     * @param reqCost the cost of using the weapon art
-     */
 
-    public WeaponArt(int reqCost){
-        this.reqCost = reqCost;
-    }
+    String activate(Actor player, GameMap map);
 
-    public String activate(Actor player, GameMap map){
-
-        return String.format("%s uses %s", player);
-
-    }
 }

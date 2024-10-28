@@ -20,7 +20,7 @@ import java.util.List;
  * @author Sebastian Aisea
  */
 
-public class Memento extends WeaponArt {
+public class Memento implements WeaponArt {
 
     /** The health cost required to use Memento. */
     private final static int HEALTH_COST = 5;
@@ -29,12 +29,6 @@ public class Memento extends WeaponArt {
     private final List<ActorState> savedStates = new ArrayList<>();
 
 
-    /**
-     * Constructor to initialize the Memento weapon art with its health cost.
-     */
-    public Memento() {
-        super(HEALTH_COST);
-    }
 
     /**
      * Activates the Memento ability. If the actor has enough health it spends health points
