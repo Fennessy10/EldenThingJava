@@ -5,8 +5,8 @@ import edu.monash.fit2099.engine.positions.GameMap;
 /**
  * An abstract class representing a weapon art
  *
- * * Created by:
- *  * @author Sebastian Aisea
+ * Created by:
+ * @author Sebastian Aisea
  *
  **/
 
@@ -16,10 +16,10 @@ public abstract class WeaponArt {
     /**
      * Constructor to initialize a WeaponArt with its name and mana cost.
      *
-     * @param manaCost the mana cost of using the weapon art
+     * @param reqCost the cost of using the weapon art
      */
 
-    public WeaponArt(int manaCost){
+    public WeaponArt(int reqCost){
         this.reqCost = reqCost;
     }
 
