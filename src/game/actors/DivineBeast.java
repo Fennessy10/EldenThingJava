@@ -25,6 +25,7 @@ public class DivineBeast extends Enemy {
     private DivinePower currentPower;
     private Actor dancePartner;
     private BossMap stageFrontMap;
+    private double chanceToChange = 0.25;
     /**
      * Constructor
      * Initializes Divine Beast with a name, display character, hit points and default behaviours.
@@ -77,12 +78,17 @@ public class DivineBeast extends Enemy {
      */
     @Override
     public Action playTurn(ActionList actions, Action lastAction, GameMap map, Display display) {
-
-        DivinePower nextPower = currentPower.getNextPower();
-         if (nextPower != currentPower) {
-             System.out.println(nextPower.initialisePower());
-             currentPower = nextPower;
-         }
+        //25% chance to switch Current Divine Power
+        double chance = Math.random();
+        if (chance < chanceToChange) {
+            if (dancePartner != null) {
+                DivinePower nextPower = currentPower.getNextPower();
+                if (nextPower != currentPower) {
+                    System.out.println(nextPower.initialisePower());
+                    currentPower = nextPower;
+                }
+            }
+        }
 
         if (dancePartner != null) {
             return new DivineAttackAction(this, currentPower, dancePartner);
