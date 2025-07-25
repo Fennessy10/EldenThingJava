@@ -13,38 +13,8 @@
 ## Contribution Log
 https://docs.google.com/spreadsheets/d/17MC-oyd58HjysaHH6ObEFYZYA8MCO7U8iM7XUoy2hFA/edit?usp=sharing
 
-## A3 Req4 creative idea
-A weather system that consists of sunny, raining and snowing.
-To do this there is an atmosphere class controls the weather effect based on a “rand” number which is executed by 
-the WeatherWizard. These three are put into the enum "Weather" enum: sunny, raining and snowing.
-
-
-Weather Enums:
-RAINY
-SUNNY
-SNOWY
-
-
-Weather Affected Lower Level Classes:
-
-WeatherWarrior
-A new type of enemy that has an katana intrinsic weapon 
-when the weather is SNOWING -> deals 50 damage
-When its RAINY he deals 30 damage and causes poison effect lasting 3 turns
-When it is SUNNY, he deals 30 damage and causes a burning effect lasting 3 turns
-
-TallAxe
-When its RAINY the axe deals 30 damage and causes a poison effect lasting 3 turns
-When it's Sunny the axe deals 30 damage and causes a burning effect lasting 3 turns
-when the weather is SNOWING -> deals 50 damage
-
-WeatherWizard
-Wanders around and randomly changes the weather
-When killed, another WeatherWizard spawns nearby
-
-
-
-
-
-
-
+## How to Play
+1) Download Zip
+2) Open the folder "EldenThingJava" in an IDE
+3) ensure java is downloaded on your system
+4) Run the Application.java file 
